@@ -163,3 +163,174 @@ Contoh layanan git remote repository:
     ```
 - ### Untuk menggabungkan dua buah branch di remote repository, kita perlu melakukan Pull Request.
 - ### GitHub Fork digunakan untuk menyalin sebuah repository ke akun GitHub kita.
+
+# HTML
+HTML adalah singkatan dari Hypertext Markup Language. HTML digunakan untuk menampilkan konten pada browser. Konten yang dapat ditampilkan seperti text, image, video, audio, dan masih banyak lagi. HTML bukan bahasa pemrograman karena tidak bisa mengolah data, hanya menampilkan konten saja. Fungsi HTML adalah sebagai 'kerangka', yang memberi struktur pada website.
+
+Ada 2 tools utama yang harus dipersiapkan untuk membuat HTML:
+1. Browser
+2. Code Editor
+
+Salah satu code editor yang populer banyak digunakan programmer adalah visual studio code. Visual studio code bisa diunduh pada link berikut.
+```
+https://code.visualstudio.com/
+```
+![Visual Studio Code](https://code.visualstudio.com/assets/home/home-screenshot-win.png)
+Rekomendasi exntensions untuk diinstall pada vscode:
+1. Live Server
+2. Auto Rename Tag
+3. Auto Close Tag
+4. Prettier
+
+## Struktur Dasar HTML
+Struktur dasar HTML terdiri dari tiga tag utama yaitu html, head, dan body.
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+</body>
+</html>
+```
+- Tag html adalah root element dari HTML.
+- Tag head umumnya berisi meta, title, link, script.
+- Tag body merupakan konten dari HTML.
+
+## HTML Tag
+HTML terdiri dari komponen yang disebut HTML Tag.
+Pada umumnya, ada 2 tipe HTML Tag:
+- Opening Tag (tag pembuka).
+- Closing Tag (tag penutup).
+```html
+<p>Hello World !</p>
+ |                |
+ v                V
+tag              tag
+pembuka          penutup
+```
+
+## HTML Element
+HTML Element merupakan sebuah komponen dalam halaman web. HTML element dimulai dari Opening Tag hingga Closing Tag. 
+Biasanya HTML element terdiri dari:
+- Opening tag
+- Closing tag
+- Atribute
+- Content
+
+Struktur dari sebuah HTML element dapat digambarkan seperti ini:
+```html
+<p style= "color = red">My first paragraph</p>
+```
+Ada dua jenis HTML Element, yaitu:
+1. HTML Element yang memiliki Opening Tag (tag pembuka) dan Closing Tag (tag penutup). Contoh:
+    ```html
+    <h1></h1>
+    ```
+2. Empty HTML Element yang memiliki Self-closing Tag, yang hanya memiliki Opening Tag (tag pembuka) dengan garis miring sebelum kurung tutup. Contoh:
+    ```html
+    <img/>
+    ```
+
+## HTML Attribute
+Di dalam Opening Tag dapat berisi attribute, fungsinya untuk memberikan informasi tambahan kepada element. Contoh penggunaan atribute:
+```html
+<img width="80%" src="https://bit.ly/3laVBck/>
+```
+- width adalah attribute untuk mengatur lebar dari element.
+- src adalah attribute untuk menentukan sumber sebagai value dari element.
+
+## HTML Comment
+Kita dapat memberikan penjelasan dari code yang kita kerjakan dengan menggunakan comment. Comment tidak akan dieksekusi oleh sistem. Comment hanya untuk dibaca oleh sesama programmer.<br>
+Contoh penggunaan comment:
+```html
+<body>
+    <!-- Ini adalah header dari halaman -->
+    <h1>Ini Header</h1>
+</body>
+```
+
+## Menjalankan HTML
+1. Secara Manual <br>
+Kita bisa menjalankan HTML dengan mencari lokasi file HTML di file explorer lalu membukanya via browser.
+    ![File Explorer](img-1.png)
+2. Menggunakan Live Server <br>
+Kekurangan menggunakan cara manual kita perlu refresh halaman jika ada perubahan content. Solusinya adalah menggunakan extensions live server pada vscode. Jika sudah diinstall kita menggunakannya dengan klik kanan pada file HTML kemudian pilih live server. Atau bisa menekan Go Live pada menu di pojok kanan bawah.
+    ![File Explorer](img-2.png)
+
+    ![Live Server](img-3.png)
+
+## HTML Tag Populer
+- img, untuk menampilkan gambar.
+```html
+<img src = "./skilvul/img-1.png" alt = "Profile">
+```
+- video, untuk menampilkan video.
+```html
+<video>
+    <source src="video.mp4"/>
+</video>
+```
+- table, untuk membuat tabel.
+```html
+<table>
+    <tr>
+        <th>Nama</th>
+    </tr>
+    <tr>
+        <td>Rizky</td>
+    </tr>
+</table>
+```
+- form, untuk mengambil input dari user, konsepnya seperti formulir.
+```html
+<form>
+    <label for = "username">Username</label>
+    <input type = "text" placeholder = "Your Username">
+</form>
+```
+
+## Semantic HTML
+Semantic element adalah element html yang maknanya sesuai dengan kebutuhan konten. Semantic element menjelaskan tujuan dari element tersebut kepada browser serta programmer lain sehingga memudahkan programmer juga untuk membaca kode.<br>
+Berikut adalah beberapa contoh dari semantic element:
+```html
+<nav> bagian berisi navigasi utama.
+<header> bagian tajuk dari halaman web.
+<section> bagian dalam sebuah halaman web.
+<aside> bagian samping dari konten utama.
+<footer> bagian bawah dari halaman web.
+```
+Kegunaan lain dari semantic HTML:
+- Meningkatkan Accessibility 
+- Meningkatkan SEO 
+- Lebih mudah di maintain
+
+## Code Snippet
+Code snippet adalah komponen yang bisa mempercepat programming. Dengan code snippet kita bisa menulis banyak kode dan potongan tag tanpa harus ditulis satu per satu. Contoh:
+```html
+// Code snippet
+ol>li*3
+// Hasilnya seperti ini
+<ol>
+    <li></li>
+    <li></li>
+    <li></li>
+</ol>
+```
+
+## Deploy HTML
+Deploy adalah proses mempublikasi aplikasi yang kita kerjakan. Lalu bagaimana mendeploy HTML kita? <br>
+Solusinya dengan menggunakan tools bernama netlify.
+
+![Netlify](img-4.png)
+Langkah-langkah mendeploy HTML ke Netlify :
+
+1. Masuk ke netlify.com kemudian lakukan registrasi menggunakan email atau akun GitHub. Direkomendasikan menggunakan akun GitHub.
+2. Setelah login masuk ke tab Sites lalu drag and drop seluruh folder html kalian.
+3. Kalian juga bisa import projek HTML kalian melalui Git repository.
+4. Projek HTML sudah ter-deploy. Kalian juga akan mendapatkan domain url dari projek kalian sehingga bisa diakses melalui internet.
