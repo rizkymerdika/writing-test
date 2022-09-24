@@ -334,3 +334,239 @@ Langkah-langkah mendeploy HTML ke Netlify :
 2. Setelah login masuk ke tab Sites lalu drag and drop seluruh folder html kalian.
 3. Kalian juga bisa import projek HTML kalian melalui Git repository.
 4. Projek HTML sudah ter-deploy. Kalian juga akan mendapatkan domain url dari projek kalian sehingga bisa diakses melalui internet.
+
+# CSS
+CSS singkatan dari cascading style sheets. Jika menggunakan HTML, kita belum dapat mendesain halaman website. Solusinya adalah menggunakan CSS. CSS adalah bahasa yang digunakan untuk mendesain halaman website. Dengan CSS, kita bisa mengubah warna, menggunakan font custom, editing text format, mengatur tata letak, dan lainnya.
+
+## Cara Menyisipkan CSS
+Terdapat 3 cara menyisipkan CSS ke dalam HTML.
+
+- Inline, menambahkan CSS pada attribute element HTML.
+    ```html
+    <p style = "color: red; font-size: 24 px;">This Paragraph Using Inline Styles</p>
+    ```
+- Internal, menggunakan tag style yang disisipkan di tag head pada file HTML.
+    ```html
+    <html lang="en">
+    <head>
+        <style>
+            p{
+                color: blue;
+                font-size: 24px;
+            }
+        </style>
+    </head>
+    <body>
+        <p>This Paragraph Using Internal Styles</p>
+    </body>
+    </html>
+    ```
+- External, membuat code CSS di file tersendiri dan terpisah dari file HTML. Kita harus membuat link di dalam file HTML untuk terhubung dengan file CSS.
+    ```html
+    <html lang="en">
+    <head>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    <style>
+    </head>
+    <body>
+        <p>This Paragraph Using Internal Styles</p>
+    </body>
+    </html>
+
+    /*Isi File CSS*/
+    p{
+    color: blue;
+    font-size: 24px;
+    }
+    ```
+    Tidak ada aturan baku untuk penempatan path file .css. Direkomendasikan dalam satu folder yang sama.
+
+## Struktur CSS
+Sintaks CSS terdiri dari elemen HTML, properti, dan value.
+```css
+/*Sintaks CSS*/
+.elementHTML{
+    property : value;
+}
+
+/*Contoh*/
+h1{
+    color: blue;
+    font-size: 24px;
+}
+```
+
+## Menerapkan Styling CSS
+- **CSS - Tag Name** <br>
+Kita bisa menggunakan Tag Elemen HTML secara langsung pada CSS. Jika menggunakan Tag Element, maka ini bersifat global.
+    ```css
+    div{
+        background-color : black;
+    }
+    ```
+- **CSS - Class Name** <br>
+Kita bisa menggunakan attribute class pada elemen HTML lalu memanggil nama class tersebut pada CSS. Gunakan (.) saat memanggil class pada CSS.
+    ```css
+    .title{
+        color : brown;
+    }
+    ```
+- **CSS - Multiple Class** <br>
+Kita dapat menggunakan lebih dari 1 class yang berbeda untuk 1 element HTML.
+    ```html
+    //Isi file HTML
+    <h1 class = "title uppercase">This is My Blog</h1>
+    <h1 class = "title lowercase">This is My Content</h1>
+    ```
+    ```css
+    //Isi file CSS
+    .title{
+        color : brown;
+    }
+    .uppercase{
+        text-transform : uppercase;
+    }
+    .lowercase{
+        text-transform : lowercase;
+    }
+    ```
+- **CSS - ID Name** <br>
+Kita bisa menggunakan attribute id pada elemen HTML lalu memanggil nama id tersebut pada CSS. Gunakan (#) saat memanggil class pada CSS.
+    ```css
+    #navigasi{
+        margin : 0;
+        padding : 0;
+    }
+    ```
+- **Chaining Selectors** <br>
+Chaining selector dapat kita gunakan contoh kasus ketika memiliki 3 tag elemen HTML pada CSS namun kita ingin ada 1 elemen HTML yang memiliki styling berbeda. 
+    ```html
+    //Isi file HTML
+    <h1>This is My Blog</h1>
+    <h1 class = "title">This is My Content</h1>
+    ```
+    ```css
+    h1{
+        color : brown;
+    }
+    h1.title{
+        color : green;
+    }
+    ```
+- **Nested Element** <br>
+Konsep CSS sama dengan HTML yaitu setiap element memiliki parent dan child. Child akan mengikuti styling rules dari parent.
+    ```html
+    //Isi file HTML
+    <div class = "parent">
+        <h1>This is My Content</h1>
+    </div>
+    ```
+    ```css
+    /*Child pada class parent akan mengikuti styling rules dari parent*/
+    .parent{
+        text-align : center;
+    }
+    ```
+- **!important CSS** <br>
+!important CSS berada di level paling atas dari ID dan Class. Jika pada styling CSS kita menggunakan !important, maka styling sebelumnya baik itu ID Name atau Class Name akan di override.
+    ```css
+    h1{
+        color : brown !important;
+    }
+
+    /*style title akan dioverride dengan style tag h1 karena menggunakan !important*/
+    h1.title{
+        color : green;
+    }
+    ```
+- **Multiple Selector** <br>
+Pada CSS kita bisa membuat code lebih efisien dan tidak repetitive.
+    ```css
+    /*Sebelum menggunakan Multiple Selector*/
+    h1{
+        color : brown;
+        font-family : 'Roboto', sans-serif;
+    }
+    p{
+        font-family : 'Roboto', sans-serif;
+    }
+
+    /*Setelah menggunakan Multiple Selector*/
+    h1{
+        color : brown;
+    }
+    h1, p{
+        font-family : 'Roboto', sans-serif;
+    }
+    ```
+
+## Flexbox
+Flexbox adalah cara untuk mengatur layout. Flexbox memiliki kemampuan untuk menyesuaikan layout secara otomatis. Penggunaannya yang mudah dan didukung berbagai browser membuat flexbox ini direkomendasikan untuk digunakan. Konsepnya sederhana. Flexbox memiliki 1 parent dan bisa beberapa child.
+![Konsep Flexbox](img-5.png)
+Untuk menggunakan flexbox kita cukup menambahkan property display: flex; pada element HTML.
+```css
+div{
+    display : flex;
+}
+```
+
+### Ordering & Orientation
+1. flex-direction <br>
+Properti flex-direction digunakan untuk mengatur arah letak item child.  Terdapat 4 value flex-direction:
+    - row (default): secara default letak item child membentuk sebuah baris dari kiri ke kanan.
+    ![Flex Direction](img-6.png)
+    - row-reverse: letak item child membentuk sebuah baris dari kiri ke kanan.
+    ![Flex Direction](img-7.png)
+    - column: letak item child membentuk sebuah baris dari atas ke bawah.
+    ![Flex Direction](img-8.png)
+    - column-reverse: letak item child membentuk sebuah baris dari bawah ke atas.
+    ![Flex Direction](img-9.png)
+
+2. flex-wrap <br>
+Flex secara default akan membuat tata letak item children dalam 1 line saja. Namun jika kamu ingin membatasi jumlah item children dalam 1 line lalu item children yang lain akan pindah ke posisi line yang baru, maka kita bisa menggunakan flex-wrap. Properti flex-wrap memiliki 3 value:
+    - no-wrap (default): secara default , flex tidak menggunakan flex-wrap.
+    ![Flex Wrap](img-10.png)
+    - wrap: flex item akan memiliki beberapa line dari atas ke bawah  jika space dalam 1 line sudah full width.
+    ![Flex Wrap](img-11.png)
+    - wrap-reverse: kebalikan dari wrap yaitu lex item akan memiliki beberapa line dari bawah ke atas  jika space dalam 1 line sudah full width.
+    ![Flex Wrap](img-12.png)
+
+3. flex-flow <br>
+Properti flex-flow digunakan sebagai shortcut untuk set up flex-direction dan flex-wrap bersamaan.
+
+4. order <br>
+Properti order pada flex adalah berfungsi untuk ordering item mana yang ingin kita atur posisinya berdasarkan urutan order. Terdapat 3 value dari properti order:
+    - -1 : Item child yang di set order -1, maka item child tersebut akan berada di ordering paling awal atau paling kiri.
+    ![Order](img-13.png)
+    - 0 (default) : Flex secara default memiliki order 0 pada setiap item child. Ini berarti 0 akan membuat item child sesuai urutan pada html.
+    - 1: Item child yang di set order 1, maka item child tersebut akan berada di ordering paling akhir atau paling kanan.
+    ![Order](img-14.png)
+
+### Alignment
+1. justify-content <br>
+Properti justify-content digunakan untuk mengatur tata letak dan space antar item child secara horizontal atau main axis. justify-content memiliki 6 value yaitu:
+    - flex-start (default)
+    ![justify-content](img-15.png)
+    - flex-end
+    ![justify-content](img-16.png)
+    - center
+    ![justify-content](img-17.png)
+    - space-between
+    ![justify-content](img-18.png)
+    - space-around
+    ![justify-content](img-19.png)
+    - space-evenly
+    ![justify-content](img-20.png)
+
+2. align-items <br>
+Properti align-items digunakan untuk mengatur align dari item child secara vertikal atau cross axis. align-items memiliki 5 value:
+    - flex-start
+    ![align-items](img-21.png)
+    - flex-end
+    ![align-items](img-22.png)
+    - center
+    ![align-items](img-23.png)
+    - baseline
+    ![align-items](img-25.png)
+    - stretch (default)
+    ![align-items](img-24.png)
