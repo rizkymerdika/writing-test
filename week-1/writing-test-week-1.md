@@ -570,3 +570,57 @@ Properti align-items digunakan untuk mengatur align dari item child secara verti
     ![align-items](img-25.png)
     - stretch (default)
     ![align-items](img-24.png)
+
+# Algoritma
+Algoritma adalah proses yang dilakukan dengan cara ynag logis (masuk akal) dan sistematis untuk menyelesaikan suatu masalah. Algortima ini sangat penting dalam programming karena programming itu identik dengan memecahkan suatu permasalahan, jadi dengan algoritma kita bisa menganalisa alur berpikir yang terstruktur. Bahasa pemrograman apapun yang dipakai oleh programmer, dengan algoritma ini para programmer jadi memiliki alur berpikir yang sama. 
+
+## Ciri-ciri Algoritma
+1. Harus memiliki input. Contoh : satu bungkus indomie.
+2. Memiliki minimal satu buah output. Contoh : semangkok mie.
+3. Instruksi jelas, tidak ambigu (Definiteness). Contoh : mulai dari menyiapkan indomie sampai tahap pembuatannya.
+4. Memiliki titik berhenti (Finiteness). Contoh : mie siap disajikan.
+5. Sebisa mungkin tepat sasaran dan efisien (Effectiveness).
+
+## Jenis Proses Algoritma
+1. Sequence: instruksi dijalankan secara berurutan.
+2. Selection: instruksi yang dijalankan jika memenuhi syarat tertentu.
+3. Iteration: instruksi yang dijalankan berulang-ulang jika memenuhi kondisi tertentu.
+4. Concurrent: beberapa instruksi dijalankan secara bersamaan.
+
+## Penyajian Algoritma
+1. Deskriptif <br>
+Penulisan algoritma dengan cara deskriptif seperti kita menulis tutorial (tata cara) dengan bahasa sehari-hari. <br>
+Contoh:
+    ```
+    Mengambil air minum:
+    1. Pergi ke dapur.
+    2. Ambil gelas di rak.
+    3. Pergi ke dispenser.
+    4. Isi Gelas dengan air.
+    5. Jika air sudah penuh.
+    6. Air siap diminum.
+    ```
+2. Flow Chart <br>
+Flow chart atau diagram alir, penyajian algoritmanya lebih mudah dibaca karena memiliki tampilan visual. Flow chart menggunakan simbol bangun datar sebagai representasi dari proses yg dilakukan.<br>
+Contoh:
+![Flow Chart](https://www.dicoding.com/blog/wp-content/uploads/2021/07/Contoh-flowchart.jpg)
+
+3. Pseudo Code<br>
+Penulisan algoritma yg hampir menyerupai penulisan pada kode pemrograman. Pada umumnya pseudocode memiliki 3 bagian:
+    1. Judul : Penjelasan dari algoritma yg dibuat.
+    2. Deklarasi : Mendefinisikan/menyiapkan semua nama (variabel) yg akan digunakan.
+    3. Deskripsi : langkah-langkah penyelesaian masalah.
+
+    Contoh:
+    ```
+    Judul
+        Menentukan Angka Ganjil atau Genap
+    Deklarasi
+        angka = bilangan bulat
+    Deskripsi
+        if angka%2 = 1
+            cetak "Ganjil"
+        else
+            cetak "Genap"
+        end
+    ```
