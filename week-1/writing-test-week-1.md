@@ -624,3 +624,232 @@ Penulisan algoritma yg hampir menyerupai penulisan pada kode pemrograman. Pada u
             cetak "Genap"
         end
     ```
+
+# JavaScript
+Javascript adalah bahasa pemograman yang sangat powerful yang digunakan untuk logic pada sebuah website. Javascript dapat membuat website menjadi interaktif dan dinamis.
+
+## Menjalankan JavaScript
+Javascript dijalankan melalui browser. Umumnya browser Chrome dan Mozilla yang sudah support untuk semua fitur Javascript. 
+
+- Syntax dan Statement<br>
+Syntax bisa dianalogikan sebagai tata cara pada bahasa pemrograman. Syntax digunakan untuk membuat statement program, instruksi untuk dijalankan oleh web browser. Contoh Syntax Javascript :<br>
+    1. alert()
+    ![Alert](img-26.png)
+    2. Prompt()
+    ![Prompt](img-28.png)
+    3. Confirm()
+    ![Confirm](img-27.png)
+- Console Log<br>
+Console log adalah tempat untuk mengecek logic pemograman web yang kita kembangkan. Console log juga tempat kita untuk melakukan debugging pada pemrograman web.
+    ```javascript
+    console.log()
+    ```
+
+## Tipe Data
+Tipe data adalah klasifikasi yang kita berikan untuk berbagai macam data yang digunakan dalam programming.
+Ada 6 tipe data fundamental pada Javascript:
+- number<br>
+Tipe data yang mengandung semua angka termasuk angka desimal.
+    ```javascript
+    let angka = 1
+    let angka = 1.5
+    ```
+- string<br>
+Tipe data yang mengandung grup karakter bisa terdiri dari huruf, angka, spasi, simbol, dan lainnya. Harus diawali dan diakhiri dengan single quotes ‘ … ‘ ataupun double quotes “ … “.
+    ```javascript
+    let string1 = "Lesson 1: Introduction"
+    ```
+- boolean<br>
+Tipe data yang hanya mempunyai 2 buah nilai yaitu TRUE atau FALSE.
+    ```javascript
+    let a = true
+    let b = false
+- null<br>
+Tipe data yang diartikan bahwa sebuah variable atau data tidak memiliki nilai.
+    ```javascript
+    let c = null
+    ```
+- undefined<br>
+Tipe data yang merepresentasikan varibel/data yang tidak memiliki nilai. Undefined didapat dari hasil berikut:<br>
+    1. Nilai dari pemanggilan variabel yang belum didefinisikan.
+    2. Nilai dari pemanggilan element array yang tidak ada.
+    3. Nilai dari pemanggilan property objek yang tidak ada.
+    4. Nilai dari pemanggilan fungsi yang tidak mengembalikan nilai (return).
+    5. Nilai dari parameter fungsi yang tidak memiliki argumen.
+    ```javascript
+    let a = "nasi"
+    let b = "telur"
+
+    console.log(c) // undefined
+    ```
+- object<br>
+Koleksi data yang saling berhubungan (related). Tipe data object dapat menyimpan data dengan tipe data apapun.
+    ```javascript
+    let karyawan = {
+        nama: "Rizky",
+        umur: 21,
+        posisi: "Admin"
+    }
+    ```
+## Variabel
+Variabel adalah tempat untuk menyimpan sebuah nilai. Ada 3 cara mendefinisikan sebuah variabel.
+- var
+    ```javascript
+    var myName = "Rizky"
+    console.log(myName) // Output: Rizky
+    var myName = "Nur" // kekurangan var bisa deklarasi lagi variabel yang namanya sama
+    ```
+- let
+    ```javascript
+    let myName = "Rizky"
+    console.log(myName) // Output: Rizky
+    myName = "Nur"
+    console.log(myName) // Output: Nur
+
+    // Dengan let variabel dapat diubah nilainya
+    ```
+- const
+    ```javascript
+    const myName = "Rizky"
+    console.log(myName) // Output: Rizky
+    myName = "Nur"
+    console.log(myName) // Error
+
+    // Dengan const variabel tidak dapat diubah nilainya
+    ```
+
+## Operator
+- Assignment Operator (=)<br>
+Assignment operator digunakan untuk menyimpan sebuah nilai pada variabel.
+    ```javascript
+    let myName = "Rizky";
+
+    let a = 3;
+    a += 1;
+    console.log(a); // Output: 4
+    ```
+- Arithmetic Operator<br>
+Arithmetic operator adalah operator yang melibatkan operasi matematika.
+    1. Tambah (+)
+    2. Kuramg (-)
+    3. Perkalian (*)
+    4. Pembagian (/)
+    5. Modulus (%)
+    6. Increment (++)
+    7. Decrement (--)
+    ```javascript
+    console.log(9%2) //Output: 2
+    ```
+- Comparison Operator<br>
+Comparison operator adalah operator yang membandingkan satu nilai dengan nilai lainnya. Hasil operasi yang melibatkan comparison operator adalah antara true or false.
+    1. Lebih kecil dari : <
+    2. Lebih besar dari: >
+    3. Lebih kecil atau sama dengan: <=
+    4. Lebih besar atau sama dengan: >=
+    5. Sama dengan (value sama): ==
+    6. Sama dengan (value dan tipe data sama): ===
+    7. Tidak sama dengan: !==
+    ```javascript
+    7 < 10 // menghasilkan true
+    3 > 5 // menghasilkan false
+    ```
+- Logical Operator<br>
+Logical operator biasa digunakan untuk sebuah CONDITIONAL pada pemograman. Menghasilkan nilai BOOLEAN yaitu TRUE or FALSE. Simbol dari Logical Operator adalah sebagai berikut:
+    1. AND operator : &&
+    2. OR operator: ||
+    3. NOT operator: !
+    ```javascript
+    console.log(true&&true)// true
+    console.log(true||false)// true
+    console.log(!true)// false
+    ```
+
+## Conditional
+Conditional merupakan statement percabangan yang menggambarkan suatu kondisi. Conditional statement akan mengecek kondisi spesifik dan menjalankan perintah berdasarkan kondisi tersebut. Yang dicek adalah apakah kondisi tersebut TRUE (benar). Jika TRUE maka code didalam kondisi tersebut dijalankan.
+- IF Statement
+    ```javascript
+    let lapar = true
+    if(lapar){
+        console.log("Yuk berangkat")
+    }
+    ```
+- IF...Else Statement
+    ```javascript
+    let lapar = true
+    if(lapar){
+        console.log("Yuk berangkat")
+    }
+    else{
+        console.log("Tidak jadi berangkat")
+    }
+    ```
+- IF..Else IF Statement
+    ```javascript
+    let color = "red"
+    if(color === "green"){
+        console.log("Maju")
+    }else if(color === "yellow"){
+        console.log("Siap-siap")
+    }else if(color === "red"){
+        console.log("Berhenti")
+    }else{
+        console.log("Unknown")
+    }
+    ```
+- Truthy and Falsy<br>
+Truthy and falsy digunakan untuk mengecek apakah variabel telah terisi namun tidak mementingkan nilainya.
+    ```javascript
+    let myName
+    if(myName){
+        console.log(myName)
+    }else{
+        myName = "Rizky"
+        console.log("myName")
+    }
+    ```
+- Switch Case Conditional
+    ```javascript
+    let hari = "Senin"
+    switch(hari){
+        case "Senin":{
+            console.log("Putih-putih");
+            break;
+        }
+        case "Selasa":{
+            console.log("Putih-merah");
+            break;
+        }
+        case "Rabu":{
+            console.log("Kotak-kotak");
+            break;
+        }
+        case "Kamis":{
+            console.log("Batik");
+            break;
+        }
+        case "Jum'at":{
+            console.log("Baju Muslim");
+            break;
+        }
+        default:{
+            console.log("Unknown");
+        }
+    }
+    ```
+- Ternary Operator
+    ```javascript
+    let isSale = true
+    isSale ? console.log("Beli") : console.log("Tidak jadi beli")
+    // Output: Beli
+    ```
+
+## Looping
+Looping adalah statement yang mengulang sebuah instruksi hingga kondisi terpenuhi atau jika kondisi stop atau berhenti tercapai.
+- For Loop<br>
+FOR LOOP merupakan instruksi pengulangan yang dapat kita berikan pada program yang kita kembangkan. Gunakan FOR LOOP jika kita tahu seberapa banyak nilai pasti untuk pengulangannya.
+    ```javascript
+    // Menampilkan urutan angka 1 - 10
+    for(let i = 1; i <= 10; i++){
+        console.log(i)
+    }
+    ```
