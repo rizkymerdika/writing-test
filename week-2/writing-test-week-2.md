@@ -148,3 +148,212 @@ Kita bisa menggunakan function yang sudah dibuat pada function lain.
 
     console.log(jumlah(10)) //Output: 18
     ```
+
+## Dynamic and Weak Typing
+JavaScript adalah bahasa dinamis dengan tipe dinamis. Variabel dalam JavaScript tidak secara langsung terkait dengan tipe data tertentu, dan variabel apa pun dapat diberi (dan ditetapkan kembali) nilai dari semua tipe.
+```javascript
+let lorem = 42 // lorem adalah sebuah number
+lorem = "Hello" // lorem sekarang sebuah string
+lorem = true // lorem sekarang sebuah boolean
+```
+JavaScript juga merupakan bahasa yang weakly typed, yang berarti memungkinkan konversi tipe implisit saat operasi melibatkan tipe data yang tidak cocok, alih-alih melempar ke error.
+```javascript
+const lorem = 42 // lorem sebuah number
+const result = lorem + "1" // JavaScript merubah lorem ke string, sehingga dapat digabungkan dengan operan lainnya
+
+console.log(result) // 421
+```
+
+## Menentukan Tipe Data Variabel
+Operator typeof dapat membantu untuk menemukan tipe data dari variabel.
+```javascript
+let a = 3
+let b = 'ipsum'
+
+typeof a // number
+typeof b // string
+```
+
+## String
+Tipe data yang mengandung grup karakter bisa terdiri dari huruf, angka, spasi, simbol, dan lainnya.
+1. Properties
+Satu-satunya properti pada string yaitu string length. Properti ini mengembalikan jumlah unit kode dalam string. JavaScript menggunakan UTF-16 encoding, dimana setiap karakter Unicode dapat dikodekan sebagai satu atau dua unit kode, jadi mungkin saja nilai yang dikembalikan menurut panjangnya tidak cocok dengan jumlah sebenarnya dari karakter Unicode dalam string.
+    ```javascript
+    const str = 'Life, the universe and everything';
+    console.log(str.length) // Output 33
+
+    const adlam = "𞤲𞥋𞤣𞤫";
+    console.log(adlam.length); // 8
+    ```
+2. Method
+    - toLowerCase()<br>
+    Method toLowerCase () akan mengembalikan nilai string yang dikonversi ke huruf kecil.
+        ```javascript
+        let kalimat = "Aku Manusia Hebat"
+
+        console.log(kalimat.toLowerCase()) // Output: 'aku manusia hebat'
+        ```
+    - toUpperCase()<br>
+    Method toUpperCase () akan mengembalikan nilai string yang dikonversi ke huruf kapital.
+        ```javascript
+        let kalimat = "Aku Manusia Hebat"
+
+        console.log(kalimat.toUpperCase()) // Output: 'AKU MANUSIA HEBAT'
+        ```
+    - charAt()<br>
+     Method charAt() mengembalikan string baru yang terdiri dari unit kode UTF-16 tunggal yang terletak di index yang ditentukan ke dalam string.
+        ```javascript
+        // Syntax
+        charAt(index)
+
+        let kata = "Manusia"
+        console.log(kata.charAt(3)) // Output: 'u'
+        ```
+    - includes()<br>
+    Method includes() akan melakukan pencarian untuk menentukan apakah satu string dapat ditemukan di dalam string lain, mengembalikan nilai true atau false. Method includes() merupakan case-sensitive.
+        ```javascript
+        // Syntax
+        str.include(searchString)
+
+        let hewan = 'White Sharks'
+        console.log(hewan.includes('White')) // True
+        console.log(hewan.includes('white')) // False
+        ```
+    - split()<br>
+    Method split() mengambil pola dan membagi sebuah String ke dalam daftar urutan substring dengan mencari pola, menempatkan substring ini ke dalam array, dan mengembalikan array.
+        ```javascript
+        // Syntax 
+        split()
+        split(separator)
+
+        const str = 'The quick brown fox jumps over the lazy dog.';
+
+        console.log(str.split(" "))
+        // Output: (9) ['The', 'quick', 'brown', 'fox', 'jumps', 'over', 'the', 'lazy', 'dog.']
+        ```
+    
+## Number
+Tipe data yang mengandung semua angka termasuk angka desimal.
+1. Method
+    - isNaN()<br>
+    Metode Number.isNaN() menentukan apakah nilai yang diteruskan atau tipe data suatu variabel adalah NaN dan tipenya adalah Number. Jika nilai yang dikembalikan adalah false, maka variabel atau nilai tersebut adalah number. Jika dikembalikan true, maka variabel atau nilai tersebut bukan number.
+        ```javascript
+        // Syntax
+        Number.isNaN()
+
+        let angka = 420
+        let kata = 'Halo123'
+        console.log(isNaN(angka)) // false
+        console.log(isNaN(kata)) // true
+        console.log(isNaN('13')) // false
+        ```
+    - toString()<br>
+    Metode toString() mengembalikan string yang mewakili objek Number.
+        ```javascript
+        // Syntax
+        toString()
+
+        const count = 20
+        console.log(count.toString()) // Output: '10'
+
+        console.log((17).toString()) // Output: '17'
+        ```
+    - toFixed()<br>
+    Metode toFixed() memformat angka menggunakan notasi fixed-point. Nilai yang dikembalikan yaitu sebuah string yang mewakili nomor yang diberikan menggunakan notasi fixed-point.
+        ```javascript
+        // Syntax
+        toFixed()
+        toFixed(digits)
+
+        const numObj = 12345.6789
+        console.log(numObj.toFixed()) // '12346'
+        console.log(numObj.toFixed(1)) // '12345.7'
+        console.log(numObj.toFixed(3)) // '12345.679'
+        ```
+
+## Math
+Math adalah objek bawaan javascript yang memiliki properti dan metode untuk konstanta dan fungsi matematika. Ini bukan function object.
+1. Properties
+    - Math.PI<br>
+    Properti Math.PI mewakili rasio keliling lingkaran dengan diameternya, sekitar 3,14159.
+        ```javascript
+        console.log(Math.PI * 2) 
+        // 6.283185307179586
+        ```
+    - Math.SQRT2<br>
+    Properti Math.SQRT2 mewakili akar kuadrat dari 2, kira-kira 1,414.
+        ```javascript
+        console.log(Math.SQRT2)
+        // 1.4142135623730951
+        console.log(Math.SQRT2 * 3)
+        // 4.242640687119286
+        ```
+2. Method
+    - Math.abs()<br>
+    Metode Math.abs() mengembalikan nilai absolut dari sebuah angka.
+        ```javascript
+        // Syntax
+        Math.abs(x)
+
+         console.log(Math.abs(-1)) // 1
+         console.log(Math.abs('-1')) // 1
+         console.log(Math.abs('halo')) // NaN
+        ```
+    - Math.sqrt()<br>
+    Metode Math.sqrt() mengembalikan akar kuadrat dari sebuah angka.
+        ```javascript
+        // Syntax
+        Math.sqrt(x)
+
+        console.log(Math.sqrt(9)) // 3
+        console.log(Math.sqrt(-1)) // NaN
+        ```
+    - Math.pow()<br>
+    Metode Math.pow() mengembalikan nilai basis yang dipangkatkan.
+        ```javascript
+        // Syntax
+        Math.pow(base, exponent)
+
+        console.log(Math.pow(7,2)) // 49
+        console.log(Math.pow(4,0.5)) // 2
+        console.log(Math.pow(8,1/3)) // 2
+        ```
+    - Math.round()<br>
+    Metode Math.round() mengembalikan nilai angka yang dibulatkan ke bilangan bulat terdekat.
+        ```javascript
+        // Syntax
+        Math.round(x)
+
+        console.log(Math.round(4.5)) // 5
+        console.log(Math.round(4.4)) // 4
+        console.log(Math.round(-4.7)) // -5
+        ```
+    - Math.floor()<br>
+    Metode Math.floor() selalu membulatkan ke bawah dan mengembalikan bilangan bulat terbesar yang kurang dari atau sama dengan angka tertentu.
+        ```javascript
+        // Syntax
+        Math.floor(x)
+
+        console.log(Math.floor(4.5)) // 4
+        console.log(Math.floor(4.4)) // 4
+        console.log(Math.floor(-4.7)) // -5
+        ```
+    - Math.ceil()<br>
+    Metode Math.ceil() selalu membulatkan dan mengembalikan bilangan bulat yang lebih kecil menjadi yang lebih besar dari atau sama dengan angka yang diberikan.
+        ```javascript
+        Math.ceil(x)
+
+        console.log(Math.ceil(4.5)) // 5
+        console.log(Math.ceil(4.4)) // 5
+        console.log(Math.ceil(-4.7)) // -4
+        ```
+    - Math.random()<br>
+    Metode Math.random() mengembalikan angka secara acak.
+        ```javascript
+        Math.random()
+
+        console.log(Math.random())
+        // Menampilkan angka secara acak
+        console.log(Math.random() * 10)
+        // Menampilkan angka secara acak dari 0 - 10
+        ```
