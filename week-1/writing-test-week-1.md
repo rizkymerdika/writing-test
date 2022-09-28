@@ -40,10 +40,10 @@ Yang membedakan antara windows dengan sistem operasi milik unix, biasanya sistem
 - touch: Command untuk membuat sebuah file.
 - mkdir: Command untuk membuat sebuah direktori.
 - head: Command untuk melihat beberapa line awal dari sebuah file text.
-- tail: Command untuk melihat beberapa line awal dari sebuah file text.
+- tail: Command untuk melihat beberapa line akhir dari sebuah file text.
 - cat: Command untuk melihat isi sebuah file.
 - cp: Command untuk mengcopy files atau directory.
-- mv:Command untuk memindahkan files atau directory. Bisa juga digunakan untuk rename.
+- mv: Command untuk memindahkan files atau directory. Bisa juga digunakan untuk rename.
 - rm: Command untuk menghapus file atau directory.
 
 # Git & GitHub
@@ -679,6 +679,7 @@ Tipe data yang merepresentasikan varibel/data yang tidak memiliki nilai. Undefin
     ```javascript
     let a = "nasi"
     let b = "telur"
+    let c
 
     console.log(c) // undefined
     ```
