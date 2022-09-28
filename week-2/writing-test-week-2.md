@@ -39,7 +39,7 @@ Do while loop akan menjalankan pengulangan 1 kali sebelum dilakukan pengecekan k
     let bensin = 4
 
     do{
-        console.log("Nyalakan Mesin!")
+        console.log(bensin)
         bensin--
     } while(bensin > 0)
     ```
@@ -79,7 +79,7 @@ Local scope berarti kita mendeklarasikan variabel didalam blocks seperti functio
     }
 
     console.log(callName()) // Rizky
-    console.log(myName // Uncaught ReferenceError: myName is not defined because local scope
+    console.log(myName) // Uncaught ReferenceError: myName is not defined because local scope
     ```
 
 ## Function
@@ -356,4 +356,152 @@ Math adalah objek bawaan javascript yang memiliki properti dan metode untuk kons
         // Menampilkan angka secara acak
         console.log(Math.random() * 10)
         // Menampilkan angka secara acak dari 0 - 10
+        ```
+## JavaScript HTML DOM
+DOM adalah jembatan supaya bahasa pemrograman dapat berinteraksi dengan dokumen HTML. Ketika halaman web dimuat, browser akan membuat sebuah Document Object Model (DOM) dari halaman web. Struktur HTML DOM direpresentasikan seperti ini:
+![HTML DOM Tree Object](https://www.w3schools.com/js/pic_htmltree.gif)
+Dengan adanya DOM ini, JavaScript diberi akses untuk membuat HTML menjadi dinamis, seperti:
+- Mengubah element HTML pada halaman website.
+- Mengubah attribute HTML pada halaman website.
+- Mengubah CSS style pada halaman website.
+- Menambah dan/atau menghapus element maupun attribute HTML.
+- Menambah HTML event (contoh: efek klik pada mouse, hover pada mouse, dan lain-lain) pada halaman website.
+- Berinteraksi dengan semua HTML event di website.
+
+## Element vs Node
+Ketika kita mengakses DOM, terdapat 2 jenis output yang akan didapatkan yaitu element dan node. Seperti yang kita tahu element adalah komponen yang dimulai dari opening tag hingga closing tag. Sedangkan node adalah setiap bagian terkecil di HTML, misalnya seperti text, comment, bentuk element juga termasuk node.
+```html
+<!-- Contoh Node -->
+<a href = "#">Klik</a>
+<!-- href merupakan node -->
+<!-- text 'Klik' merupakan node -->
+```
+
+## Traversing Elements
+Untuk mengakses element HTML dikategorikan menjadi 3, yaitu:<br>
+1. Ke Bawah
+    - getElementById(Id)<br>
+    Kita bisa menggunakan getElementById untuk mengakses element HTML berdasarkan nilai id-nya.
+        ```javascript
+        <h1 id="title">Hallo</h1>
+
+        let title = document.getElementById('title')
+        console.log(title) 
+        // Output: <h1 id="title">Hallo</h1>
+        ```
+    - getElementsByClassName(class)<br>
+    Kita bisa menggunakan getElementByClassName untuk mengakses element HTML berdasarkan nilai class-nya.
+        ```javascript
+        <ul class="list">
+            <li class="item">Satu</li>
+            <li class="item">Dua</li>
+            <li class="item">Tiga</li>
+        </ul>
+
+        let list = document.getElementsByClassName('list')
+        console.log(list)
+        // Output: HTMLCollection [ul.list]
+        console.log(list[0])
+        // Output: <ul class = 'title'>...</ul>
+        console.log(list[0].children)
+        // Output: HTMLCollection(3) [li.item, li.item, li.item]
+        ```
+    - getElementsByTagName()<br>
+    Kita bisa menggunakan getElementByTagName untuk mengakses element HTML berdasarkan jenis tag-nya.
+        ```javascript
+        <ul class="list">
+            <li class="item">Satu</li>
+            <li class="item">Dua</li>
+            <li class="item">Tiga</li>
+        </ul>
+
+        let item = document.getElementsByTagName('li')
+        console.log(item)
+        // Output: HTMLCollection(3) [li.item, li.item, li.item]
+        console.log(item[1])
+        //Output: <li class="item">Dua</li>
+        ```
+    - querySelector(cssSelector)<br>
+    Untuk mengakses element-element HTML berdasarkan CSS Selector-nya HTML, kita bisa menggunakan querySelector.
+        ```javascript
+        <ul class="list">
+            <li class="item">Satu</li>
+            <li class="item">Dua</li>
+            <li class="item">Tiga</li>
+        </ul>
+
+        let itemQuery = document.querySelector('.item')
+        console.log(itemQuery)
+        // Output: <li class="item">Satu</li>
+        ```
+    - querySelectorAll(cssSelector)<br>
+    Untuk mengakses element-element HTML berdasarkan CSS Selector-nya HTML, kita juga bisa menggunakan querySelectorAll.
+        ```javascript
+        <ul class="list">
+            <li class="item">Satu</li>
+            <li class="item">Dua</li>
+            <li class="item">Tiga</li>
+        </ul>
+
+        let itemQueryAll = document.querySelectorAll('.item')
+        console.log(itemQueryAll)
+        // Output: NodeList(3) [li.item, li.item, li.item]
+        console.log(itemQueryAll[1])
+        // Output: <li class="item">Dua</li>
+        ```
+2. Ke Atas
+    - parentElement<br>
+    Untuk mengakses parent dari element child.
+        ```javascript
+        <ul class="list">
+            <li class="item">Satu</li>
+            <li class="item">Dua</li>
+            <li class="item">Tiga</li>
+        </ul>
+
+        let itemQuery = document.querySelector('.item')
+        console.log(itemQuery) 
+        // Output: <li class="item">Satu</li>
+        console.log(itemQuery.parentElement)
+        // Output: <ul class = 'title'>...</ul>
+        ```
+    - closest()<br>
+    Untuk menemukan elemen terdekat yang cocok dengan CSS selector.
+        ```javascript
+        <div class="demo container"> Grandparent
+            <div class="demo">Parent
+                <div id="myElement" class="demo">The parent of this div element will be selected.</div>
+            </div>
+        </div>
+
+        let element = document.getElementById("myElement");
+        console.log(element.closest(".container"))
+        // Output: <div class="demo container">...</div>
+        ```
+3. Ke Samping
+    - nextElementSibling<br>
+    Properti nextElementSibling digunakan untuk mengakses elemen berikutnya di tingkat yang sama.
+        ```javascript
+        <ul class="list">
+            <li class="item">Satu</li>
+            <li class="item">Dua</li>
+            <li class="item">Tiga</li>
+        </ul>
+
+        let itemQuery = document.querySelector('.item')
+        console.log(itemQuery.nextElementSibling)
+        // Output: <li class="item">Dua</li>
+        ```
+    - previousElementSibling<br>
+    Properti previousElementSibling digunakan untuk mengakses elemen sebelumnya di tingkat yang sama.
+        ```javascript
+        <ul class="list">
+            <li class="item">Satu</li>
+            <li class="item">Dua</li>
+            <li class="item">Tiga</li>
+        </ul>
+
+        let itemQuery = document.querySelector('.item')
+        console.log(itemQuery.previousElementSibling)
+        //Output: null
         ```
