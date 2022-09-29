@@ -176,7 +176,7 @@ typeof b // string
 
 ## String
 Tipe data yang mengandung grup karakter bisa terdiri dari huruf, angka, spasi, simbol, dan lainnya.
-1. Properties
+1. Properties<br>
 Satu-satunya properti pada string yaitu string length. Properti ini mengembalikan jumlah unit kode dalam string. JavaScript menggunakan UTF-16 encoding, dimana setiap karakter Unicode dapat dikodekan sebagai satu atau dua unit kode, jadi mungkin saja nilai yang dikembalikan menurut panjangnya tidak cocok dengan jumlah sebenarnya dari karakter Unicode dalam string.
     ```javascript
     const str = 'Life, the universe and everything';
@@ -254,7 +254,7 @@ Tipe data yang mengandung semua angka termasuk angka desimal.
         toString()
 
         const count = 20
-        console.log(count.toString()) // Output: '10'
+        console.log(count.toString()) // Output: '20'
 
         console.log((17).toString()) // Output: '17'
         ```
@@ -504,4 +504,136 @@ Untuk mengakses element HTML dikategorikan menjadi 3, yaitu:<br>
         let itemQuery = document.querySelector('.item')
         console.log(itemQuery.previousElementSibling)
         //Output: null
+        ```
+
+## Manipulasi Element
+1. Mengubah Konten Elemen
+    - .innerHTML<br>
+    Element.innerHTML dapat kita gunakan untuk mengubah konten HTML di dalam sebuah element.
+        ```javascript
+        <div id="app"></div>
+
+        let app = document.getElementById('app')
+        app.innerHTML = "Hello"
+        console.log(app) 
+        // <div id="app">Hello</div>
+        ```
+    - .innerText<br>
+    Element.innerText dapat kita gunakan untuk mengubah teks di dalam sebuah element.
+        ```javascript
+        <div id="app"></div>
+
+        let app = document.getElementById('app')
+        app.innerText = "Hello"
+        console.log(app)
+        // Output: <div id="app">Hello</div>
+        ```
+    - .innerHTML vs .innerText
+        ```javascript
+        app.innerHTML = "<h1>Hello</h1>"
+        // Properti .innerHTML jika isinya adalah tag html maka akan diubah menjadi element htmlnya.
+        ```
+        ![innerHTML](img-1.png)
+        ```javascript
+        app.innerText = "<h1>Hello</h1>"
+        // Properti .innerText hanya mengubah teks nya saja.
+        ```
+        ![innerText](img-2.png)
+2. Membuat Element<br>
+Untuk membuat element kita bisa menggunakan method .createElement().
+    ```javascript
+    let p = document.createElement('p')
+    console.log(p)
+    // Output: <p></p>
+    ```'
+3. Memasukkan Element ke Element Lain<br>
+Untuk memasukkan suatu element ke element lain kita bisa menggunakan method .append().
+    ```javascript
+    <div id="app"></div>
+
+    let app = document.getElementById('app')
+    let p = document.createElement('p')
+    app.append(p)
+    // <div id="app"><p></p></div>
+    ```
+    ```javascript
+    // Perbedaan .append() dan .appendChild()
+
+    // Node object
+    app.append(p) // Fine
+    app.appendChild(p) // Fine
+
+    // DOMString
+    app.append("Hello") // Fine
+    app.appendChild("Hello") // Uncaught TypeError
+    ```
+4. Menghapus Element<br>
+Untuk menghapus suatu element kita bisa menggunakan method .remove().
+    ```javascript
+    <div id="app"></div>
+    <div id="tes"></div>
+
+    let tes = document.getElementById('tes')
+    tes.remove()
+    // Output: <div id="app"></div>
+    // Element div dengan id "tes" terhapus
+    ```
+5. Memanipulasi Attribute Element
+    - .attributes
+    Untuk mengambil, mengubah atau menambah nilai attribute kita bisa menggunakan properti .attributes.
+        ```javascript
+        <img src="https://bit.ly/2FKluzq" alt="Cat" id="cat-image" />
+
+        let image = document.getElementById("cat-image");
+        console.log(image.attributes)
+        // NamedNodeMap {0: src, 1: alt, 2: id, src: src, alt: alt, id: id, length: 3}
+
+        console.log(image.src)
+        // Output: https://bit.ly/2FKluzq
+
+        image.alt = "Fish"
+        console.log(image.alt) // Fish
+        ```
+    - .getAttribute(attribute)<br>
+    Alternatif lain untuk mengambil nilai attribute yaitu bisa menggunakan method .getAttribute().
+        ```javascript
+        <img src="https://bit.ly/2FKluzq" alt="Cat" id="cat-image" />
+
+        let image = document.getElementById("cat-image");
+        console.log(image.getAttribute('src'))
+        // Output: https://bit.ly/2FKluzq
+        ```
+    - .setAttribute(attribute, nilai)<br>
+    Alternatif lain untuk mengubah atau menambah attribute yaitu bisa menggunakan method .setAttribute().
+        ```javascript
+        <img src="https://bit.ly/2FKluzq" alt="Cat" id="cat-image" />
+
+        let image = document.getElementById("cat-image");
+        image.setAttribute('width', '400px')
+        // <img src="https://bit.ly/2FKluzq" alt="Cat" id="cat-image" width="400px"/>
+        ```
+6. Memanipulasi CSS dari Element
+    - .style.property<br>
+    Kegunaan dari element.style.property adalah untuk mengambil/mengubah/menambah CSS dari element HTML.
+        ```javascript
+        <h1 id="head" style="color: blue;">Ini H1</h1>
+
+        let head = document.getElementById('head')
+        console.log(head.style.color) // Blue
+
+        head.style.color = 'red'
+        console.log(head.style.color) // Red
+
+        head.style.fontSize = '40px'
+        console.log(head.style.fontSize) // 40px
+        ```
+    - getComputedStyle()<br>
+    Kegunaan dari getComputedStyle adalah untuk mengambil CSS dari element HTML.
+        ```javascript
+        <h1 id="head" style="color: blue;">Ini H1</h1>
+
+        let head = document.getElementById('head')
+        let headStyle = getComputedStyle(head)
+        console.log(headStyle.color) 
+        // rgb(0, 0, 255)
         ```
