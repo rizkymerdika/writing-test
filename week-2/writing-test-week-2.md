@@ -579,7 +579,7 @@ Untuk menghapus suatu element kita bisa menggunakan method .remove().
     // Element div dengan id "tes" terhapus
     ```
 5. Memanipulasi Attribute Element
-    - .attributes
+    - .attributes<br>
     Untuk mengambil, mengubah atau menambah nilai attribute kita bisa menggunakan properti .attributes.
         ```javascript
         <img src="https://bit.ly/2FKluzq" alt="Cat" id="cat-image" />
@@ -637,3 +637,100 @@ Untuk menghapus suatu element kita bisa menggunakan method .remove().
         console.log(headStyle.color) 
         // rgb(0, 0, 255)
         ```
+## DOM Event
+Event adalah interaksi yang terjadi pada website. Untuk memberikan user experience yang baik selain menampilkan konten, halaman web juga harus bisa menangkap interaksi user. Berbagai HTML DOM Event:
+- click
+- submit
+- focus
+- blur
+- hover
+- change
+- scroll
+
+Terdapat 3 cara untuk memberikan event:
+- HTML attribute
+    ```html
+    <button onclick="alert('Selamat Datang')">Click Me</button>
+    ```
+    Ketika button di-klik, maka keluar pop-up: 
+    ![Alert](img-3.png)
+    Tidak hanya element button saja yang bisa diberikan event click.<br>
+    Contoh lain:
+    ```html
+    <h1 onmouseover="alert('Welcome')">Come Here</h1>
+    ```
+    Ketika cursor dari mouse mendekati element h1, maka keluar pop-up:
+    ![Alert](img-4.png)
+- event property
+    ```javascript
+    <p id="paragraf">Click Me</p>
+
+    let paragraf = document.getElementById('paragraf')
+    paragraf.onclick = function (){
+        alert('Ini dari paragraf')
+    }
+    ```
+    Ketika button di-klik, maka keluar pop-up:
+    ![Alert](img-5.png)
+    Kita juga bisa membuat function secara terpisah:
+    ```javascript
+    <p id="paragraf">Click Me</p>
+
+    let paragraf = document.getElementById('paragraf')
+    paragraf.onclick = showMessage
+    function showMessage(){
+        alert('Ini dari paragraf')
+    }
+    ```
+- addEventListener()
+    ```javascript
+    <button id="btn">Click Me</button>
+
+    let button = document.getElementById('btn')
+    button.addEventListener("click", function(){
+        alert('Ini dari button')
+    })
+    ```
+    Ketika button di-klik, maka keluar pop-up:
+    ![Alert](img-6.png)
+    Method .addEventListener() bisa menjalankan multiple handler.
+    ```javascript
+    <button id="btn">Click Me</button>
+
+    let button = document.getElementById('btn')
+    button.addEventListener("click", function(){
+        alert('Ini dari button')
+    })
+    button.addEventListener("click", function(){
+        confirm('apakah ini dari button ?')
+    })
+    ```
+    Kedua .addEventListener akan dijalankan secara bergantian, dimana alert akan muncul terlebih dahulu baru setelah itu yang confirm.<br>
+
+    Misalkan kita mempunyai element beberapa input dalam sebuah form. 
+    ```javascript
+    <form id="frm">
+        <input id="username" type="text"/> 
+        <input id="password" type="password"/>
+        <button type="submit">Submit</button>
+    </form>
+    ```
+    Bagaimana caranya  kita mendapatkan isi dari kedua input tersebut saat submit form?
+    ```javascript
+    let form = document.getElementById('frm')
+    let username = document.getElementById('username')
+    let password = document.getElementById('password')
+    let formData
+
+    form.addEventListener("submit", function(event){
+        // cegah page refresh
+        event.preventDefault()
+
+        formData = {
+            username: username.value,
+            password: password.value
+        }
+        console.log(formData)
+    })
+    // {username: 'rizky', password: '123'}
+    ```
