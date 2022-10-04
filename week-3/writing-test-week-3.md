@@ -130,3 +130,194 @@ let a = inventory.map(dataInven => {
 })
 console.log(a)
 ```
+
+## Object
+Object adalah sebuah tipe data pada variabel yang menyimpan properti/key dan value/fungsi (method). Properti adalah data lengkap dari sebuah object. Method adalah action dari sebuah object. Apa saja yang dapat dilakukan dari suatu object. Object termasuk tipe data non-primitive. Object dapat diassign kedalam sebuah variabel. Sama seperti array, didalam object kita dapat menyimpan properti dengan tipe data apapun.
+```javascript
+let buku = {
+    judul: 'Cantik itu Luka',
+    penulis: 'Eka Kurniawan',
+    tahun: 2002,
+}
+```
+
+## Mengakses Object dan Property Object
+```javascript
+let buku = {
+    judul: 'Cantik itu Luka',
+    penulis: 'Eka Kurniawan',
+    tahun: 2002,
+}
+
+// Mengakses seluruh object
+console.log(buku)
+```
+Untuk mengakses properti object ada dua cara:
+- Dot Notation
+    ```javascript
+    let buku = {
+        judul: 'Cantik itu Luka',
+        penulis: 'Eka Kurniawan',
+        tahun: 2002,
+    }  
+
+    // Memanggil variabel dengan properti
+    console.log(buku.judul) // Cantik itu Luka
+    ```
+- Bracket Notation
+    ```javascript
+    let buku = {
+        judul: 'Cantik itu Luka',
+        penulis: 'Eka Kurniawan',
+        "tahun terbit": 2002,
+    }  
+
+    console.log(buku['tahun terbit']) // 2002
+    ```
+
+## Update Object
+Kita dapat melakukan update pada variabel dengan tipe data Object. Object dapat mengupdate value dari key yang sudah tersedia. Object juga dapat menambahkan key dan value baru.
+```javascript
+let buku = {
+    judul: 'Cantik itu Luka',
+    penulis: 'Eka Kurniawan',
+    "tahun terbit": 2002,
+}  
+
+buku.penulis = "Eka Fuzianti"
+buku.penerbit = "Gramedia"
+
+
+console.log(buku)
+// judul: "Cantik itu Luka"
+// penerbit: "Gramedia"
+// penulis: "Eka Fuzianti"
+// tahun terbit: 2002
+```
+Jika menggunakan const pada variable object, kita tidak bisa mengganti seluruh data object dengan object yang baru. Akan tetapi jika mengganti value dari key masih bisa.
+```javascript
+const buku = {
+    judul: 'Cantik itu Luka',
+    penulis: 'Eka Kurniawan',
+    "tahun terbit": 2002,
+}  
+
+buku = {
+    title: 'Earth'
+}
+
+console.log(buku) // Uncaught TypeError: Assignment to constant variable.
+```
+Jadi jika membutuhkan untuk update seluruh data object gunakan ‘let’ pada saat deklarasi variabel.
+
+## Delete Object Property
+Kita dapat menghapus properti dari object menggunakan delete operator.
+```javascript
+let buku = {
+    judul: 'Cantik itu Luka',
+    penulis: 'Eka Kurniawan',
+    "tahun terbit": 2002,
+} 
+
+delete buku.penulis
+
+console.log(buku)
+// judul: "Cantik itu Luka"
+// tahun terbit: 2002
+```
+
+## Method Object
+Jika value yang kita masukkan pada property berupa function, maka itu disebut method. Kita bisa membuat method custom untuk kita gunakan sesuai kebutuhan.
+```javascript
+let greeting = {
+    welcome: function(){
+        return "Hai, selamat datang"
+    }
+}
+
+console.log(greeting.welcome()) // "Hai, selamat datang"
+```
+
+## Nested Object
+Pada real application nanti kalian pasti menemukan data object yang kompleks. Object yang berasal dari turunan object lainnya. Atau simpelnya adalah object di dalam object.
+```javascript
+let buku = {
+    judul: "Intro to Data Mining",
+    tahun: "2018",
+    penulis: {
+        penulis1:{
+            nama: "Eka Kurniawan",
+            umur: 20
+        },
+        penulis2:{
+            nama: "Fauzan Al-Haq",
+            umur: 21
+        }
+    }
+}
+
+console.log(buku.penulis.penulis1.nama)
+// "Eka Kurniawan"
+```
+
+## Looping Object
+Jika kita ingin menampilkan seluruh object properti. Kita bisa menggunakan looping. Jadi tidak perlu mengakses secara manual memanggil setiap propertinya. Caranya menggunakan for...in.
+```javascript
+let buku = {
+    judul: "Intro to Data Mining",
+    tahun: "2018",
+    penulis: {
+        penulis1:{
+            nama: "Eka Kurniawan",
+            umur: 20
+        },
+        penulis2:{
+            nama: "Fauzan Al-Haq",
+            umur: 21
+        }
+    }
+}
+
+for(let data in buku){
+    console.log(buku[data])
+    // Intro to Data Mining
+    // 2018
+    // {penulis1: {…}, penulis2: {…}} 
+}
+
+for(let data in buku.penulis.penulis2){
+    console.log(buku.penulis.penulis2[data]);
+    // Fauzan Al-Haq
+    // 21
+}
+```
+
+## Array of Object
+Object sama seperti Array yang bisa menyimpan banyak data. Kita dapat menggunakan array untuk menyimpan banyak object.
+```javascript
+let siswa = [
+    {
+        nama: 'Rizky',
+        umur: 17,
+        isVerified: true
+    },
+    {
+        nama: 'Fauzan',
+        umur: 16,
+        isVerified: true
+    },
+    {
+        nama: 'Abi',
+        umur: 18,
+        isVerified: true
+    }
+]
+
+// Gunakan forEach jika object berada di dalam array
+siswa.forEach((listSiswa) =>{
+    console.log(listSiswa)
+    // {nama: 'Rizky', umur: 17, isVerified: true}
+    // {nama: 'Fauzan', umur: 16, isVerified: true}
+    // {nama: 'Abi', umur: 18, isVerified: true}
+})
+```
