@@ -321,3 +321,101 @@ siswa.forEach((listSiswa) =>{
     // {nama: 'Abi', umur: 18, isVerified: true}
 })
 ```
+
+## Modules
+Modules adalah reusable code yang dapat di-export dari suatu file javascript dan di-import ke file javascript yang lain. Reusable code di sini adalah data yang dapat digunakan berulang kali. Kita dapat melakukan export pada data apapun seperti string, object, array, number, class, hingga function.<br>
+Kenapa harus membuat modules ?
+- Mudah menemukan dan mengatasi debug pada program.
+- Membuat program menjadi komponen-komponen kecil sehingga code lebih mudah dibaca dan dimengerti.
+- Reusable code.<br>
+
+Sebelum menggunakan export import untuk membuat modules, ada beberapa syarat yang harus disiapkan. Saat menjalankan modules, kita tidak bisa menggunakan url local komputer kita di browser. Gunakan extension Live Server pada Vscode. Lalu pada file HTML kita harus menambahkan script attribute type untuk modules.
+```html
+<script src="script.js" type="module"></script>
+```
+Kita akan mencoba membuat modules. Buat file index.html, indonesia.js dan jepang.js.
+```html
+// Kita taruh file indonesia.js sebagai javascript utama
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="indonesia.js" type="module" defer></script>
+</head>
+<body>
+    
+</body>
+</html>
+```
+```javascript
+// Isi file jepang.js
+// Kita export variabel motor agar bisa digunakan js yang lain
+export let motor = ['honda', 'yamaha', 'kawasaki', 'suzuki']
+
+// Isi file indonesia.js
+// Kita import variabel motor dari jepang.js
+// Kita bisa mengganti nama variabel menggunakan keyword as
+import {motor as motorJepang} from './jepang.js'
+console.log(motorJepang);
+// ['honda', 'yamaha', 'kawasaki', 'suzuki']
+```
+Ada cara lain untuk melakukan export.
+```javascript
+let motor = ['honda', 'yamaha', 'kawasaki', 'suzuki']
+
+export{motor}
+```
+Saat melakukan export, kita bisa mengganti nama dari function, variabel, data lainnya menggunakan keyword as.
+```javascript
+let motor = ['honda', 'yamaha', 'kawasaki', 'suzuki']
+
+export{motor as motorJepang}
+```
+Ada juga yang namanya export default. Export default hanya bisa digunakan untuk 1 data yang ingin kita export. 
+```javascript
+// Isi file jepang.js
+export let motor = ['honda', 'yamaha', 'kawasaki', 'suzuki']
+let entertainment = ['anime', 'manga', 'light novel', 'action figure']
+export default{entertainment}
+
+// Isi file indonesia.js
+// Pemanggilan untuk export default berbeda dengan export biasa
+import entertainment, {motor as motorJepang} from './jepang.js'
+console.log(motorJepang);
+console.log(entertainment);
+```
+
+## Rekursif
+Rekursif adalah adalah function yang memanggil dirinya sendiri sampai kondisi tertentu. Rekursif kebanyakan digunakan untuk case matematika, fisika, kimia, dan yang berhubungan dengan calculation.<br>
+Ciri dari rekursif:
+- Fungsi rekursif selalu memiliki kondisi yang menyatakan kapan fungsi tersebut berhenti.
+- Fungsi rekursif selalu memanggil dirinya sendiri sambil mengurangi atau memecahkan data masukan setiap panggilannya.
+
+Pada rekursif terdapat 2 kondisi:
+- Base case yaitu kondisi berhenti.
+- Recursive case yaitu kondisi untuk memanggil diri sendiri.
+Contoh kasus kita akan menampilkan urutan bilangan 1 hingga 5.
+```javascript
+function deretAngka(n){
+    // Base case
+    if(n == 1){
+        console.log(n);
+    }
+    // Recursive case
+    else{
+        deretAngka(n-1)
+        console.log(n);
+    }
+}
+
+deretAngka(5) 
+// Output
+// 1
+// 2
+// 3
+// 4
+// 5
+```
