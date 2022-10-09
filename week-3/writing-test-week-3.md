@@ -419,3 +419,222 @@ deretAngka(5)
 // 4
 // 5
 ```
+
+## Asynchronous JavaScript
+Asynchronous programming adalah teknik yang memungkinkan suatu program untuk memulai suatu task yang berpotensi berjalan lama dan masih dapat responsif terhadap events lain saat task tersebut masih berjalan, daripada user harus menunggu hingga task tersebut selesai. Setelah task selesai, program akan ditampilkan dengan hasilnya. Sedangkan program yang dijalankan satu baris pada satu waktu, sesuai dengan urutan dan harus menunggu proses selesai sebelum melanjutkan ke proses selanjutnya disebut synchronous program.
+```javascript
+// Contoh Synchronous
+const name = 'Miriam'; // Kerjakan kode ini terlebih dahulu
+const greeting = `Hello, my name is ${name}!`; // Setelah pada baris sebelumnya telah selesai barulah eksekusi baris ini
+console.log(greeting); // Kemudian yang terakhir baris ini
+// "Hello, my name is Miriam!"
+```
+Asynchronous sangat penting, pastinya kita tidak mau user yang menggunakan program harus menunggu lama agar website kita termuat sepenuhnya, dengan menerapkan asynchronous user dapat berinteraksi atau melakukan hal lain pada website tanpa perlu menunggu hingga selesai termuat.<br>
+Javascript merupakan bahasa pemrograman single thread, non-blocking, dan asynchronous. Single thread maksudnya ia hanya memiliki satu jalur untuk menyelesaikan task. Ada juga multi thread yang artinya memiliki banyak jalur untuk menyelesaikan task.
+Non-blocking artinya antrian task tidak harus berurut dan dapat disela. Misalnya, ada task A dan task B, task A butuh waktu lama agar prosesnya selesai, maka task B bisa mendahului task A.
+
+## setTimeout()
+Function setTimeout() digunakan untuk membuat sebuah output dalam waktu yang ditentukan dalam satuan waktu milisecond. setTimeout() juga bisa digunakan untuk mengatur seberapa lama interval waktu yang diperlukan untuk sebuah variabel dieksekusi atau muncul di layar.
+```javascript
+console.log("A"); 
+console.log("B"); 
+console.log("C"); 
+// Output
+// A
+// B
+// C
+
+console.log("A");
+setTimeout(() => {
+    console.log("B");
+}, 1000)
+console.log("C");
+// Output
+// A
+// C
+// B, interval waktu untuk ditampilkan sebesar 1000 milisecond
+```
+
+## Callback
+Callback adalah sebuah function yang diteruskan ke function lain atau function yang menjadi parameter function lain. Callback dulunya merupakan cara utama penerapan fungsi asynchronous dalam javascript. Namun, kode berbasis callback bisa menjadi sulit dimengerti ketika callback harus memanggil function yang menerima callback juga.
+```javascript
+function myDisplayer(some){
+    console.log(some);
+}
+function myGreeting(){
+    myDisplayer("Hellow")
+}
+
+myGreeting() // "Hellow"
+```
+
+## Promise
+Promise adalah dasar dari pemrograman asynschronous dalam JavaScript modern. Promise adalah sebuah objek yang dikembalikan oleh function asynchronous. Pada saat promise dikembalikan ke caller, operasi sering kali belum selesai, tetapi objek promise menyediakan metode untuk menangani keberhasilan atau kegagalan operasi.
+```javascript
+let nontonPromise = new Promise((resolve, reject) => {
+    resolve('Nonton terpenuhi')
+    reject('Gagal nonton')
+})
+
+nontonPromise
+    .then(result => {console.log(result);}) // 'Nonton terpenuhi'
+    .catch(error => {console.log(error);}) // Catch untuk menangkap reject
+```
+
+## Web Storage
+Ada beberapa cara untuk menyimpan data pengguna seperti pencarian, artikel berita, dan lain-lain ke lokal (browser) menggunakan web storage seperti cookies, local storage, dan session storage. Data ini dimanfaatkan oleh situs web tersebut untuk merekam kebiasaan pengguna agar dapat memberikan rekomendasi sesuai preferensi si pengguna tersebut. Objek localStorage dan sessionStorage, bagian dari API penyimpanan web, adalah dua tools hebat untuk menyimpan pasangan data secara lokal. Menggunakan localStorage dan sessionStorage untuk penyimpanan adalah alternatif selain menggunakan cookie dan memiliki beberapa keunggulan:
+- Data hanya disimpan secara lokal dan tidak dapat dibaca oleh server, yang menghilangkan masalah keamanan yang disebabkan oleh cookie.
+- Ini memungkinkan lebih banyak data disimpan (10mb untuk sebagian besar browser).
+- Sintaksnya straightforward atau langsung.
+
+## Coookies
+Cookies diperkenalkan ke web untuk menjaga informasi tetap tentang pengguna. Cookies adalah string yang memiliki atribut nama, atribut nilai, dan atribut opsional tambahan. Cookie dapat menyimpan hingga 4096 byte data (ini termasuk nama, nilai, domain, tanggal kedaluwarsa, dan apa pun yang Anda muat di sana). Anda dapat menambahkan cookie dalam jumlah terbatas per domain yang berubah tergantung pada browser Anda.<br>
+Namun ada beberapa kekurangan yang perlu kita perhatikan mengenai cookies di antaranya:<br>
+- Setiap kita mengakses situs web, cookies juga kembali dikirim sehingga memperlambat aplikasi web kamu dengan mengirimkan data yang sama.
+- Cookies disertakan pada setiap HTTP request, sehingga mengirimkan data yang tidak dienkripsi melalui internet, maka saat kita ingin menyimpan data dalam cookies kita harus mengenkripsinya terlebih dahulu.
+- Cookies hanya dapat menyimpan data sebanyak 4KB.
+- Lalu cookies juga memiliki tanggal kadaluarsa. Tanggal ini telah ditentukan sehingga web browser bisa menghapus cookies jika tanggal sudah kadaluarsa atau tidak dibutuhkan.
+
+## Local Storage
+Local storage memiliki karakteristik sebagai berikut:
+- Menyimpan data tanpa tanggal kadaluarsa.
+- Data tidak akan dihapus ketika web browser ditutup dan akan tersedia seterusnya selama kita tidak menghapus data local storage pada web browser.
+- Dapat menyimpan data hingga 5MB.
+- Hanya dapat menyimpan data string.
+
+1. Menyimpan Data<br>
+Untuk menyimpan data pada local storage, kita menggunakan method setItem() yang membutuhkan 2 parameter. Parameter pertama adalah key yang ingin kita simpan dan parameter kedua adalah data (value) dari key yang akan disimpan.
+    ```javascript
+    localStorage.setItem('key', value)
+    ```
+    Kita akan membuat web sederhana dengan fitur search. Pertama buat file HTML nya.
+    ```html
+        <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Document</title>
+                <SCript src="script.js" defer></SCript>
+            </head>
+            <body>
+                <form action="">
+                    <input type="text" id="searchKey">
+                    <input type="submit" id="searchSumbit" onclick="">
+                </form>
+            </body>
+            </html>        
+    ```
+    Kemudian pada file javascript isi seperti di bawah ini.
+    ```javascript
+    var searchList = []
+    function onSearch(){
+        let searchValue = document.getElementById('searchKey').value
+        searchList.push(searchValue)
+
+        let searchListString = JSON.stringify(searchList) // mengubah array menjadi string
+        localStorage.setItem('searchKey', searchListString) // menyimpan pencarian dengan key 'searchKey'
+    }
+    ```
+    Outputnya bisa dilihat pada browser, kemudian inspect element, pilih tab application dan local storage.
+    ![Local Storage](img-2.png)
+
+2. Mengambil Data<br>
+Untuk mengambil data yang telah tersimpan pada local storage, kita dapat menggunakan method getItem() yang membutuhkan 1 parameter. Parameter tersebut adalah key dari data yang kita inginkan.
+    ```javascript
+    localStorage.getItem('key');
+    ```
+    Kita akan melanjutkan aplikasi search yang telah dibuat. Kita akan menambahkan beberapa elemen untuk menampilkan riwayat pencarian
+    ```html
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <SCript src="script.js" defer></SCript>
+    </head>
+    <body>
+        <form action="">
+            <input type="text" id="searchKey">
+            <input type="submit" id="searchSumbit" onclick="onSearch()">
+        </form>
+        <div id="search-history"></div>
+    </body>
+    </html>
+    ```
+    Kemudian pada file javascript kita buat fungsi getSearchHistory dan menggunakan method getItem().
+    ```javascript
+    var searchList = []
+    function onSearch(){
+        let searchValue = document.getElementById('searchKey').value
+        searchList.push(searchValue)
+
+        let searchListString = JSON.stringify(searchList) // mengubah array menjadi string
+        localStorage.setItem('searchKey', searchListString) // menyimpan pencarian dengan key 'searchKey'
+    }
+
+    var searchList = JSON.parse(localStorage.getItem("searchKey")) || []
+    function getSearchHistory(){
+        var list = ''
+        for(var i = 0; i < searchList.length; i++){
+            list += `<div>${searchList[i]}</div>`
+        }
+        document.getElementById('search-history').innerHTML = list
+    }
+    if (searchList.length > 0) {  // Jika panjang array searchList > 0
+        getSearchHistory(); // panggil fungsi getSearchHistory
+    }    
+    ```
+    Hasilnya seperti ini:<br>
+    ![Local Storage](img-3.png)
+
+3. Menghapus Data<br>
+Untuk menghapus data yang telah tersimpan pada local storage, kita dapat menggunakan method removeItem() yang membutuhkan 1 parameter. Parameter tersebut adalah key dari data yang ingin kita hapus.
+    ```javascript
+    // menghapus key tertentu
+    localStorage.removeItem("key");
+
+    // menghapus semua key
+    localStorage.clear();
+    ```
+    Kita akan tambahkan button hapus riwayat pada file HTML dengan atribut onClick memiliki value fungsi clearSearchHistory().
+    ```javascript
+    function clearSearchHistory(){
+        localStorage.removeItem('searchKey')
+        document.getElementById('search-history').innerHTML = ''
+    }
+    ``` 
+
+## Session Storage
+Berbeda dengan local storage, walaupun masuk ke dalam web storage, data yang tersimpan pada session storage akan hilang ketika session dari sebuah laman berakhir.<br>
+Session storage mempunyai beberapa karakteristik, yaitu:
+- Data yang disimpan pada session storage akan terus tersimpan selama browser terbuka dan tidak hilang jika laman di-reload.
+- Membuka banyak tab/window dengan URL yang sama, akan menciptakan session storage yang berbeda di masing-masing tab/window.
+- Menutup tab/window akan mengakhiri session dan menghapus data yang tersimpan di session storage pada tab/window tersebut.
+- Data yang tersimpan dalam session storage harus berbentuk string.
+- Hanya dapat menyimpan data sebanyak 5MB.
+
+1. Menyimpan Data<br>
+Sama dengan local storage, sintaks untuk menyimpan data pada session storage adalah sebagai berikut:
+    ```javascript
+    // menambah session storage
+    sessionStorage.setItem('key', value);
+    ```
+
+2. Mengambil Data<br>
+Sama seperti local storage, cara mendapatkan data dari session storage juga menggunakan getItem(), seperti berikut ini:
+    ```javascript
+    // mendapatkan session storage
+    sessionStorage.getItem('key')
+    ```
+
+3. Menghapus Data<br>
+Syntax untuk menghapus data dari session storage ada 2, yaitu:
+    ```javascript
+    // menghapus session storage satu persatu berdasarkan key
+    sessionStorage.removeItem('key');
+
+    // menghapus seluruh session storage sekaligus
+    sessionStorage.clear();
+    ```
