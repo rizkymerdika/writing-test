@@ -95,3 +95,64 @@ let testFetchAsync = async () => {
 }
 testFetchAsync()
 ```
+
+## Git & GitHub Lanjutan
+
+### Git Branch
+Fitur yang wajib digunakan jika ingin berkolaborasi dengan developer atau dalam tim yaitu git branch. Untuk menghindari conflict code, kita tidak boleh berkolaborasi dalam project di satu branch yang sama.<br>
+Analoginya, misal Chea akan mengerjakan fitur A dan Rizky mengerjakan fitur B. Masing-masing fitur tersebut harus dibuat branch masing-masing. Tidak boleh mengganggu branch master yang sudah terupdate.
+
+Untuk membuat branch, bisa menggunakan command berikut.
+```
+git branch <branch>
+```
+Misal kita ingin membuat fitur login.
+```
+git branch fitur_login
+```
+Untuk melihat list branch yang dibuat.
+```
+git branch
+```
+Pindah ke branch tertentu.
+```
+// Menggunakan checkout atau switch
+git checkout <branch>
+git switch <branch>
+```
+
+### Git Merge
+Setelah membuat branch baru, lalu lakukan commit, saatnya kita menyatukan pekerjaan ke branch utama. Untuk menyatukan branch cabang fitur yang telah kita kembangkan. Gunakan perintah seperti berikut ini:<br>
+1. Checkout dahulu ke branch utama.
+    ```
+    git checkout <branch>
+    ```
+2. Lalu lakukan merge.
+    ```
+    git merge <fitur>
+    ```
+
+### Langkah-langkah Kolaborasi di GitHub
+1. Siapkan respository, boleh repository pribadi atau organization. Lebih baik menggunakan organization.
+2. Team leader membuat organizationnya terlebih dahulu.
+3. Undang anggota tim ke organization dan jadikan owner.
+4. Team leader buat repository pada organization. Repo dibuat public dan ceklis README.
+5. Pada repository buat branch bernama dev. Branch main sebagai branch utama sedangkan branch dev ini sebagai branch untuk development.
+6. Masing-masing anggota melakukan clone pada repository yang sudah dibuat (1x saja).
+7. Bagi tugas pada masing-masing anggota tim.
+8. Sebelum membuat perubahan atau ngoding, lakukan git pull untuk mendapatkan kode terbaru.
+9. Anggota membuat branch dari dev berdasarkan tugas masing-masing.
+10. Lakukan pengerjaan di dalam branch yang sudah dibuat.
+11. Jika fitur sudah selesai, lakukan commit seperti biasa.
+12. Sebelum push branch, lakukan git merge dev untuk menghindari conflict di github. 
+13. Jika ada conflict, maka selesaikan conflictnya. Jika sudah aman, push branch ke github.
+14. Lakukan pull request untuk melakukan merge ke branch dev. Pull request adalah permintaan untuk menggabungkan antara branch yang kita buat ke branch development atau branch yang lain.
+15. Tunggu pull request di-acc oleh team leader. Hanya team leader yang bisa acc pull request.
+
+### Merge Conflict
+Conflict terjadi ketika lebih dari satu orang mengerjakan atau mengutak-atik satu file yang sama. Cara solve conflict:
+1. Pastikan branch development di anggota yang mengalami conflict sudah up to date.
+2. Lakukan merge pada branch development di branch yang mengalami conflict.\
+3. Conflict yang terjadi akan muncul, kita akan diminta untuk memilih perubahan mana yang akan digunakan, antara lain current changes, incoming changes atau kita bisa mengambil kedua perubahannya. 
+4. Setelah dipilih lakukan commit branch.
+5. Maka merge pull request sudah bisa dilakukan.
