@@ -336,3 +336,104 @@ function App() {
 export default App;
 ```
 Jadi state adalah data lokal. Props digunakan agar component memiliki data yang dinamis yang dikirim dari component lain atau state.
+
+## useState
+useState adalah React Hook yang memungkinkan kita untuk menambahkan variabel state ke component. useState digunakan ketika kita membutuhkan data yang dinamis.
+```javascript
+const [state, setState] = useState(initialState)
+```
+Contoh penggunaan useState:
+```javascript
+function MemberInfo(){
+    const [name, setName] = useState("Rizky")
+    const [age, setAge] = useState(21)
+    const [track, setTrack] = useState("Front-End")
+
+    return(
+        <div className="member-info">
+            <div>
+                <img src={"https://cdn.pixabay.com/photo/2017/06/13/12/53/profile-2398782_960_720.png"} alt="" />
+            </div>
+            <div>
+                <p>{name}</p> {/* Rizky */}
+                <p>{age}</p> {/* 21 */}
+                <p>{track}</p> {/* Front-End */}
+            </div>
+        </div>
+    )
+}
+```
+
+## Handling Events
+Handling events menggunakan React sangat mirip dengan menangani event pada DOM elements. React events dinamai menggunakan camelCase. Dengan JSX kita melempar function sebagai event handler.
+
+Sebagai contoh:
+```javascript
+<button onclick={activateLasers}> {/*Menggunakan Curly Braces*/}
+  Activate Lasers
+</button>
+```
+Di sini kita akan coba membuat counter. Pertama-tama kita buat component counter.
+```javascript
+function Counter(){
+    const [count, setCount] = useState(0)
+
+    function increment(){ {/*Fungsi untuk increment*/}
+        setCount(count + 1) {/*Count ditambah satu*/}
+    }
+    function decrement(){ {/*Fungsi untuk decrement*/}
+        if(count == 0){ {/*Jika count sama dengan nol, maka nilai count tetap nol. Agar nilai count tidak mines*/}
+            setCount(count)
+        }else{
+            setCount(count - 1)  {/*Count dikurang satu*/}
+        }
+    }
+
+    return(
+        <>
+            <button onClick={decrement}>-</button>
+            <span>{count}</span>
+            <button onClick={increment}>+</button>
+        </>
+    )
+}
+```
+Tidak hanya onClick masih banyak lagi event handler yang bisa digunakan seperti onMouseOver , onFocus, dan lain-lain.
+
+Melempar argumen ke event handler.
+```javascript
+function MemberInfo(){
+    const [name, setName] = useState('Alief')
+    function changeName(fullName){
+        setName(fullName)
+    }
+
+    return(
+        <div className="member-info">
+            <div>
+                <button onClick={() => changeName('Rizky Merdika')}>Change Name</button>
+                <p>{name}</p>
+            </div>
+        </div>
+    )
+}
+```
+
+## Conditional Rendering
+Di React, kita dapat membuat komponen berbeda yang merangkum perilaku yang kita butuhkan. Kemudian, kita hanya dapat merender beberapa component di antaranya, bergantung pada status aplikasi Anda. Conditional Rendering di React bekerja dengan cara yang sama seperti conditional di JavaScript. Di react, kita dapat merender JSX secara kondisional menggunakan syntax javascript seperti if, &&, dan ternary operator.
+
+Contoh:
+```javascript
+function App() {
+  const [isLogin, setIsLogin] = useState(false)
+
+  return (
+    <>
+      <button onClick={() => setIsLogin(true)}>Login</button> {/*isLogin diset bernilai true*/}
+      
+      {isLogin ? <Counter/> : <span>Login dulu cuy</span>}
+      {/*Initial value dari isLogin false, sehingga component Counter tidak ditampilkan melainkan yang ditampilkan adalah span. Jika isLogin bernilai true, maka component Counter ditampilkan.*/}
+    </>
+  );
+}
+```
