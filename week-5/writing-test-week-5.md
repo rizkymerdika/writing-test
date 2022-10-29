@@ -503,3 +503,36 @@ function App() {
   );
 }
 ```
+
+## Form
+Elemen form bekerja sedikit berbeda dari elemen DOM lainnya di react, karena elemen form secara alami menyimpan beberapa internal state. Dalam HTML, elemen form seperti input, textarea, dan select biasanya mempertahankan statenya sendiri dan memperbaruinya berdasarkan input pengguna. Di React, state yang dapat diubah biasanya disimpan di properti state komponen, dan hanya diperbarui dengan setState(). Selain itu form pada react harus menggunakan event handler onChange yang fungsinya untuk menangkap data inputan dari user.
+```javascript
+import { useState } from "react"
+
+function App() {
+  const [name, setName] = useState("") {/* Menampung value name */}
+  const [address, setAddress] = useState("") {/* Menampung value address */}
+  const [data, setData] = useState({}) {/* Sebagai object yang nantinya menampung name dan address */}
+
+  function handleSubmit(e){
+    e.preventDefault()
+    setData({name, address}) {/* Push name dan address ke data */}
+    setName("") {/* Membuat input kembali kosong setelah submit */}
+    setAddress("") {/* Membuat input kembali kosong setelah submit */}
+  }
+
+  return (
+    <>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="">Name</label>
+        <input type="text" value={name} onChange={(e) => setName(e.target.value)} /> {/* e.target.value untuk mengambil value dari inputan user */}
+        <label htmlFor="">Address</label>
+        <input type="text" value={address} onChange={(e) => setAddress(e.target.value)}/>
+        <button type="submit">Submit</button>
+      </form>
+    </>
+  );
+}
+
+export default App;
+```
