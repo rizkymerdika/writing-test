@@ -437,3 +437,69 @@ function App() {
   );
 }
 ```
+
+## Hooks
+Hooks adalah fitur baru yang dikenalkan react js pada tahun 2018. Inti dari hooks adalah untuk memudahkan penggunaan functional components agar bisa menggunakan state dan lifecycle lainnya. Sebelumnya state dan lifecycle hanya bisa digunakan di class component, namun dengan hooks kita bisa menggunakannya juga di functional component. Dengan menggunakan functional component dan menggunakan hooks, maka code akan terlihat lebih clean, pendek, dan mudah dimengerti.
+
+## useEffect
+useEffect merupakan hooks yang bisa digunakan untuk menggunakan lifecycle pada functional component dengan mudah. lifeCycle yang ada di dalam hooks, hanya menggunakan useEffect yang menyatukan componentDidMount, componentDidUpdate, dan componentWillUnmount.
+
+lifeCycle structure:
+![lifeCycle Structure](https://miro.medium.com/max/1400/1*IrFfI3bAU6Gz8Pfv1CHulg.png)
+
+Penggunaan useEffect bisa dimasukan sebelum melakukan render, useEffect sendiri biasanya ditempatkan dibawah useState.
+
+Cara penggunaan useEffect:
+```javascript
+import React, { useEffect } from 'react'
+import { useState } from "react"
+
+function App() {
+  const [nama, setNama] = useState(true)
+  const [changed, setChanged] = useState(0)
+
+  useEffect(() => {
+    console.log("Ada perubahan");
+    setChanged(changed + 1)
+  }, [nama])
+
+  return (
+    <>
+      <h1>Perubahan : {changed}</h1>
+      <button onClick={() => setNama(!nama)}>Ubah</button>
+    </>
+  );
+}
+```
+useEffect biasanya akan digunakan saat kamu membuat suatu call api, karen api akan selalu dipanggil saat komponen terbentuk, maka call api bisa dilakukan di dalam useEffect. Kita akan coba melakukan call api menggunakan axios. Sebelum itu kita install terlebih dahulu axios nya.
+```
+npm install axios
+```
+```javascript
+import React, { useEffect } from 'react'
+import { useState } from "react"
+import axios from "axios"
+
+function App() {
+  const [digimons, setDigimons] = useState([])
+
+  useEffect(() => {
+    axios("https://digimon-api.vercel.app/api/digimon").then((res) => {
+      setDigimons(res.data)
+    })
+  }, [])
+
+  return (
+    <>
+      {
+        digimons.map((item, index) => (
+          <div key={index}>
+            <img src={item.img} />
+            <h2>{item.name}</h2>
+          </div>
+        ))
+      }
+    </>
+  );
+}
+```
