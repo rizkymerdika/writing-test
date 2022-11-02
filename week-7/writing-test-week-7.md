@@ -46,3 +46,183 @@ PropTypes.exact // Yang dikirim oleh props dengan yang didekalarasi dalam exact 
 // Kombinasi arrayOf dan oneOfType
 PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number]))
 ```
+
+## React Router
+React router adalah library routing paling populer di react. Untuk menggunakan react router di react kita harus menginstall terlebih dahulu react routernya.
+```
+npm install react-router-dom
+```
+
+### Configuring The Router
+Langkah termudah untuk menyetting router yaitu kita perlu mengimport router khusus yaitu BrowserRouter dan membungkusnya ke seluruh app di router tersebut. Umumnya kita hanya perlu mengimport BrowserRouter di file index.js dan bungkus komponen App dengan router.
+```javascript
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App'
+import './index.css'
+import {BrowserRouter} from 'react-router-dom'
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </React.StrictMode>
+)
+```
+Langkah selanjutnya adalah menentukan route. Mendefinisikan route semudah mendefinisikan satu komponen route untuk setiap route dalam aplikasi anda dan kemudian menempatkan semua komponen route tersebut dalam satu komponen route. Setiap kali URL anda berubah, react router akan melihat route yang ditentukan dalam komponen routes dan itu akan merender konten di element prop dari route yang memiliki jalur yang cocok dengan URL.
+```javascript
+import {Routes, Route, Link} from 'react-router-dom'
+
+function App() {
+
+  return (
+    <>
+      <Routes>
+        <Route path='/' element={<HomePage/>}/>
+        <Route path='/about' element={<AboutPage/>}/>
+      </Routes>
+    </>
+  )
+}
+```
+
+### Handling Navigation
+Biasanya dalam sebuah aplikasi Anda akan menavigasi dengan tag anchor, tetapi React Router menggunakan komponen Link untuk menangani navigasi.
+```javascript
+<nav>
+    <Link to={"/"}>Home</Link>
+    <Link to={"/about"}>About</Link>
+</nav>
+```
+
+### Dynamic Routing
+Fitur canggih yang paling sederhana dan paling umum di React Router adalah menangani route dinamis. Route terakhir pada contoh di bawah adalah route dinamis yang memiliki parameter dinamis :id.
+```javascript
+<Routes>
+    <Route path='/' element={<HomePage/>}/>
+    <Route path='/about' element={<AboutPage/>}/>
+    <Route path='/detail/:id' element={<DetailPage/>}/>
+</Routes>
+```
+Ketika Anda memiliki route dinamis seperti ini, Anda ingin mengakses nilai dinamis dalam komponen Anda yang merupakan tempat useParams masuk. useParams tidak mengambil parameter dan akan mengembalikan objek dengan key yang cocok dengan parameter dinamis di route Anda. Dalam kasus ini, parameter dinamis kami adalah :id sehingga hook useParams akan mengembalikan objek yang memiliki key id dan nilai key itu akan menjadi id aktual di URL kami.
+```javascript
+import {useParams} from 'react-router-dom'
+
+import {useParams} from 'react-router-dom'
+
+function DetailPage() {
+  const { id } = useParams()
+  const detailInfo = [
+    {
+      id: 1,
+      nama: "Rizky",
+      alamat: "Bandung",
+      hobi: "Main Game"
+    },
+    {
+      id: 2,
+      nama: "Alief",
+      alamat: "Bandung",
+      hobi: "Ngewibu"
+    },
+    {
+      id: 3,
+      nama: "Amanda",
+      alamat: "Purwakarta",
+      hobi: "Musik"
+    }
+  ]
+  return (
+    <>
+        {
+          detailInfo.filter((el) => el.id === +id).map((el, index) => {
+            return(
+              <div key={index}>
+                <h2>Nama: {el.nama}</h2>
+                <h2>Alamat: {el.alamat}</h2>
+                <h2>Hobi: {el.hobi}</h2>
+              </div>
+            )
+          })
+        }
+    </>
+  )
+}
+
+export default DetailPage
+```
+
+### Nested Routes
+Nested route cukup sederhana untuk dilakukan. Yang perlu anda lakukan adalah membuat route parent yang memiliki path yang disetel ke path bersama untuk semua komponen child anda. Kemudian di dalam route parent anda dapat meletakkan semua komponen route child.
+```javascript
+<Route path='/about' element={<AboutPage/>}>
+    <Route path='student' element={<AboutStudent/>}/>
+    <Route path='teacher' element={<AboutTeacher/>}/>
+    <Route index element={<AboutSchool/>}/>
+</Route>
+```
+Bisa dilihat pada route child tidak lagi menyertakan path /about. Dan juga route untuk /about diganti dengan komponen route yang tidak memiliki path, tetapi memiliki index. Artinya path dari index route itu sama dengan parent route.
+
+Kemudian kita harus menambahkan komponen Outlet pada element parent route. Komponen Outlet pada dasarnya adalah komponen placeholder yang akan merender apa pun konten halaman kita saat ini.
+```javascript
+import {Outlet, Link} from 'react-router-dom'
+
+function AboutPage() {
+  return (
+    <>
+        <Link to={"student"}>About Student</Link>
+        <Link to={"teacher"}>About Teacher</Link>
+        <Outlet/>
+    </>
+  )
+}
+
+export default AboutPage
+```
+
+### useNavigation Hook
+useNavigation adalah hook yang sangat sederhana yang tidak menggunakan parameter dan mengembalikan fungsi navigasi tunggal yang dapat Anda gunakan untuk mengarahkan pengguna ke halaman tertentu.
+```javascript
+import {useNavigate} from 'react-router-dom'
+
+function HomePage() {
+  const navigation = useNavigate()
+  const data = [
+    {
+      id: 1,
+      nama: "Rizky"
+    },
+    {
+      id: 2,
+      nama: "Alief"
+    },
+    {
+      id: 3,
+      nama: "Amanda"
+    }
+  ]
+
+  const handleDetail = (id) => {
+    navigation(`/detail/${id}`)
+  }
+
+  return (
+    <>
+        <h1>Ini Home Page</h1>
+        {
+          data.map((el, index) => {
+            return(
+              <div key={index}>
+                <h2>Nama: {el.nama}</h2>
+                <button onClick={() => handleDetail(el.id)}>Detail</button>
+              </div>
+            )
+          })
+        }
+    </>
+  )
+}
+
+export default HomePage
+```
