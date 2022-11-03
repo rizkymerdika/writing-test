@@ -226,3 +226,78 @@ function HomePage() {
 
 export default HomePage
 ```
+
+## React Redux
+Redux adalah state container yang dapat diprediksi untuk javascript apps dan tools yang sangat berharga untuk mengatur application state. Ini adalah library populer untuk mengatur state di react. Dalam pengantar singkat untuk Redux ini, kita akan membahas konsep utama: reducers, actions, action creators, dan store.
+
+### Reducer
+Reducer adalah fungsi yang mengambil state sebelumnya dan sebuah action sebagai argument dan mengembalikan state baru. Actions adalah sebuah objek dengan type dan payload (optional).
+```javascript
+const initialState = {
+    count: 0
+}
+
+function counterReducer(state = initialState, action){
+    switch (action.type) {     
+        default: return state
+    }
+}
+
+export default counterReducer
+```
+Reducer menentukan bagaimana state aplikasi berubah sebagai respons terhadap tindakan yang dikirim ke store.
+
+### Action
+Action adalah objek javascript yang mewakili muatan informasi yang mengirimkan data dari aplikasi ke store. Action memiliki type dan payload opsional. Action sering dikirim (dispatched) menggunakan action creator. Action creator adalah sebuah fungsi yang mengembalikan object action. Action object yang dikembalikan dari action creator dikirim ke semua reducers berbeda di app.
+
+Bergantung pada action nya, reducers dapat memilih untuk mengembalikan versi baru dari statusnya. Bagian state yang baru dikembalikan kemudian disalurkan ke state app, yang kemudian disalurkan kembali ke aplikasi react, yang kemudian menyebabkan semua komponen dirender ulang.
+
+Berikut adalah contoh action creator:
+```javascript
+export function increment(){
+    return {
+        type: INCREMENT
+    }
+}
+```
+Dan ini adalah simpel reducer yang berhubungan dengan action type INCREMENT:
+```javascript
+function counterReducer(state = initialState, action){
+    switch (action.type) {     
+        case INCREMENT:
+            return {
+                count: state.count + 1
+            }   
+        case DECREMENT:
+            return {
+                count: state.count - 1
+            }
+        default: return state
+    }
+}
+```
+
+### Store
+Store mengacu kepada objek yang menyatukan actions (yang mewakili apa yang terjadi) dan reducers (yang memperbarui state sesuai dengan tindakan tersebut). Hanya boleh ada satu store dalam aplikasi redux.
+```javascript
+import {createStore} from 'redux'
+import counterReducer from '../reducer/counterReducer'
+
+const store = createStore(counterReducer)
+
+export default store
+```
+Jika kita memiliki dua reducers, maka gunakan combineReducers.
+```javascript
+import {createStore} from 'redux'
+import counterReducer from '../reducer/counterReducer'
+import todoReducer from '../reducer/todoReducer'
+
+const allReducer = combineReducers({
+  counter: counterReducer,
+  todo: todoReducer
+})
+const store = createStore(allReducer)
+
+export default store
+```
