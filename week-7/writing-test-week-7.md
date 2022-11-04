@@ -301,3 +301,152 @@ const store = createStore(allReducer)
 
 export default store
 ```
+
+### Provider Component
+Kita akan menggunakan komponen Provider dari React Redux untuk membungkus komponen App dan membuat redux store dapat diakses dari komponen manapun di bawah pohon komponen react.
+```javascript
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App'
+import './index.css'
+import {Provider} from 'react-redux'
+import store from './redux/store'
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+    <Provider store={store}>
+      <App />
+    </Provider>
+)
+```
+
+### useSelector
+Untuk mengakses item di redux store, gunakan hook yang disebut useSelector. useSelector mengambil fungsi selector sebagai argumen. Fungsi selector akan menerima state dari store sebagai argument yang akan digunakan untuk mengembalikan bidang yang diinginkan. Karena useSelector adalah Hook khusus, komponen akan dirender ulang setiap kali Hook dipanggil.
+```javascript
+import { useDispatch, useSelector } from "react-redux"
+import { decrement, increment } from "../redux/action/counterAction"
+
+
+function Counter() {
+    const {count} = useSelector(state => state)
+
+  return (
+    <>
+        <button>-</button>
+        <span>{count}</span>
+        <button>+</button>
+    </>
+  )
+}
+
+export default Counter
+```
+
+### useDispatch
+Hook ini mengembalikan referensi ke fungsi dispatch dari redux store. Anda dapat menggunakannya untuk mengirimkan actions sesuai kebutuhan.
+```javascript
+import { useDispatch, useSelector } from "react-redux"
+import { decrement, increment } from "../redux/action/counterAction"
+
+
+function Counter() {
+    const dispatch = useDispatch()
+    const {count} = useSelector(state => state)
+
+  return (
+    <>
+        <button onClick={() => dispatch(decrement())}>-</button>
+        <span>{count}</span>
+        <button onClick={() => dispatch(increment())}>+</button>
+    </>
+  )
+}
+
+export default Counter
+```
+
+## Redux Thunk
+Secara default, redux action dikirim secara synchronous, yang merupakan masalah bagi non-trivial app yang perlu berkomunikasi dengan API eksternal atau melakukan side effect. Redux juga memungkinkan middleware yang berada di antara action yang dikirim dan action yang mencapai reducers. Salah satu middleware library yang sangat populer yang memungkinkan side effects dan asynchronous action adalah redux thunk.
+
+Thunk adalah konsep pemrograman di mana fucntion digunakan untuk menunda atau mendelay evaluasi atau kalkulasi dari operasi.
+
+Redux Thunk adalah middleware yang memungkinkan kita memanggil action creators yang mengembalikan function alih-alih sebuah action object. Fucntion tersebut menerima metode dispatch store, yang kemudian digunakan untuk dispatch action synchronous reguler di dalam function's body setelah operasi asynchronous selesai.
+
+Pertama, gunakan terminal untuk menavigasi ke direktori proyek dan menginstal paket redux-thunk di proyek Anda:
+```
+npm install redux-thunk
+```
+Sekarang terapkan middleware saat membuat store app Anda menggunakan applyMiddleware dari Redux. Diberikan aplikasi React dengan redux dan react-redux, file index.js Anda mungkin terlihat seperti ini:
+```javascript
+import {combineReducers, createStore, applyMiddleware} from 'redux'
+import todoReducer from '../reducer/todoReducer'
+import thunk from 'redux-thunk'
+
+const allReducer = combineReducers({
+    todo: todoReducer
+})
+const store = createStore(allReducer, applyMiddleware(thunk))
+
+export default store
+```
+Kasus penggunaan yang paling umum untuk Redux Thunk adalah untuk berkomunikasi secara asinkron dengan API eksternal untuk mengambil atau menyimpan data. Redux Thunk memudahkan pengiriman action yang mengikuti lifecycle dari permintaan ke API eksternal.
+```javascript
+// File action
+import axios from 'axios'
+
+export const GET_TODO = "GET_TODO"
+export const FETCH_START = "FETCH_START"
+export const SUCCESS_GET_TODO = "SUCCESS_GET_TODO"
+
+function fetchStart (){
+    return {
+        type: FETCH_START
+    }
+}
+
+function successGetTodo (data){
+    return{
+        type: SUCCESS_GET_TODO,
+        payload: data
+    }
+}
+
+export const getTodo = () => {
+    return async (dispatch) => {
+        dispatch(fetchStart())
+
+        const result = await axios.get("https://63478a450484786c6e82998f.mockapi.io/todo")
+        dispatch(successGetTodo(result.data))
+    }
+}
+```
+Untuk kelengkapan, berikut adalah contoh tampilan todo reducer untuk menangani lifecycle of the request:
+```javascript
+// File reducer
+import { FETCH_START, SUCCESS_GET_TODO } from "../action/todoAction"
+
+const initialState = {
+    todos: [],
+    isLoading: false,
+    err: null
+}
+
+function todoReducer(state = initialState, action){
+    switch (action.type) {
+        case FETCH_START:
+            return{
+                ...state,
+                isLoading: true
+            }
+        case SUCCESS_GET_TODO:
+            return{
+                ...state,
+                todos: action.payload,
+                isLoading: false
+            }
+        default: 
+            return state
+    }
+}
+
+export default todoReducer
+```
