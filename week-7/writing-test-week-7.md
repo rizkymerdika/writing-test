@@ -367,7 +367,7 @@ export default Counter
 ## Redux Thunk
 Secara default, redux action dikirim secara synchronous, yang merupakan masalah bagi non-trivial app yang perlu berkomunikasi dengan API eksternal atau melakukan side effect. Redux juga memungkinkan middleware yang berada di antara action yang dikirim dan action yang mencapai reducers. Salah satu middleware library yang sangat populer yang memungkinkan side effects dan asynchronous action adalah redux thunk.
 
-Thunk adalah konsep pemrograman di mana fucntion digunakan untuk menunda atau mendelay evaluasi atau kalkulasi dari operasi.
+Thunk adalah konsep pemrograman di mana function digunakan untuk menunda atau mendelay evaluasi atau kalkulasi dari operasi.
 
 Redux Thunk adalah middleware yang memungkinkan kita memanggil action creators yang mengembalikan function alih-alih sebuah action object. Fucntion tersebut menerima metode dispatch store, yang kemudian digunakan untuk dispatch action synchronous reguler di dalam function's body setelah operasi asynchronous selesai.
 
