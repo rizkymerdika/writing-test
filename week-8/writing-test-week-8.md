@@ -77,3 +77,80 @@ function Counter() {
 
 export default Counter
 ```
+
+### useReducer
+Sebuah alternatif untuk useState. Memungkinkan custom state logic. Context bukan state management. Agar context menjadi state management kita bisa menggunakan useReducer. Konsepnya mirip seperti redux thunk, kita harus membuat reducer serta action.
+
+useReducer menerima dua argument, yaitu reducer dan initialState. Fungsi reducer berisi custom logic state dan initialState dapat berupa nilai sederhana tetapi umumnya akan berisi objek. useReducer mengembalikan state saat ini dan dispatch method.
+
+Berikut adalah contoh penggunaan useReducer pada counter app:
+```javascript
+import { createContext, useReducer } from "react"
+
+export const CounterContext = createContext()
+
+const INCREMENT = "INCREMENT"
+const DECREMENT = "DECREMENT"
+
+const initialState = {
+    count: 0
+}
+
+function reducer(state, action){
+    switch (action.type) {
+        case INCREMENT:
+            return {
+                count: state.count + 1
+            }
+        case DECREMENT:
+            return {
+                count: state.count - 1
+            }
+        default:
+            return state
+    }
+}
+
+function CounterProvider({children}) {
+    const [state, dispatch] = useReducer(reducer, initialState)
+
+    function increment(){
+        dispatch({
+            type: INCREMENT
+        })
+    }
+    function decrement(){
+        dispatch({
+            type: DECREMENT
+        })
+    }
+
+  return (
+    <CounterContext.Provider value={{state, increment, decrement}}>
+        {children}
+    </CounterContext.Provider>
+  )
+}
+
+export default CounterProvider
+```
+Kemudian pada component reducer kita ambil value yang dioper menggunakan useContext:
+```javascript
+import { useContext } from "react"
+import { CounterContext } from "../CounterProvider"
+
+
+function Counter() {
+  const {state, increment, decrement} = useContext(CounterContext)
+
+  return (
+    <>
+        <button onClick={decrement}>-</button>
+        <span>{state.count}</span>
+        <button onClick={increment}>+</button>
+    </>
+  )
+}
+
+export default Counter
+```
