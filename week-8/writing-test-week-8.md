@@ -375,7 +375,7 @@ test('increment button', () => {
 
   expect(count.textContent).toBe("0")
 
-  fireEvent.click(incrementBtn)
+  fireEvent.click(incrementBtn) // fireEvent memicu DOM event.
   expect(count.textContent).toBe("1")
 })
 ```
